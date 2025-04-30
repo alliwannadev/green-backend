@@ -19,17 +19,17 @@ services:
       - ./mysql/data:/docker-entrypoint-initdb.d
   redis:
     container_name: master_redis
-    image: redis:latest
+    image: redis:7.4.3
     ports:
       - 6379:6379
     volumes:
-      - "./redis/data:/data"
-      - "./redis/conf/redis.conf:/usr/local/conf/redis.conf"
+      - ./redis/data:/data
+      - ./redis/conf:/conf
     labels:
       - "name=redis"
       - "mode=standalone"
     restart: always
-    command: "redis-server /usr/local/conf/redis.conf"
+    command: redis-server /conf/redis.conf
   kafka_broker:
     image: apache/kafka:3.8.0
     hostname: kafka_broker
