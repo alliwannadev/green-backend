@@ -1,0 +1,50 @@
+val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
+bootJar.enabled = false
+
+plugins {
+	java
+	id("org.springframework.boot") version "3.4.5"
+	id("io.spring.dependency-management") version "1.1.7"
+}
+
+group = "alliwannadev"
+version = "1.0.0"
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom(configurations.annotationProcessor.get())
+	}
+}
+
+subprojects {
+	apply(plugin = "java")
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "org.springframework.boot")
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation("ch.qos.logback:logback-classic")
+
+		compileOnly("org.projectlombok:lombok")
+		annotationProcessor("org.projectlombok:lombok")
+
+		testCompileOnly("org.projectlombok:lombok")
+		testAnnotationProcessor("org.projectlombok:lombok")
+
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	}
+
+	tasks.withType<Test> {
+		useJUnitPlatform()
+	}
+}
