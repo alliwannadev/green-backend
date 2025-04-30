@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+# local 환경에서만 P6Spy 활성화
+decorator:
+  datasource:
+    enabled: true

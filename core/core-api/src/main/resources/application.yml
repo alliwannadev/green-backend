@@ -1,3 +1,10 @@
 spring:
+  profiles:
+    active: local
   application:
     name: core-api
+
+# 기본적으로 P6Spy 비활성화
+decorator:
+  datasource:
+    enabled: false
