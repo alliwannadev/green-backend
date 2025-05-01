@@ -1,0 +1,4 @@
+### 내 회원 정보 조회 API 호출
+GET http://localhost:8080/v1/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6MjkyOTAxNjYxODM5MzYwLCJleHAiOjE3NDYwNzk2MjF9.W9b7xiwVb8O6KACkyx96Ms3wtnvLH8tOU2bPPTJno8Q
