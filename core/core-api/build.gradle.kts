@@ -2,9 +2,13 @@ val querydslVersion = "5.1.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    // Commons-lang3
+    implementation("org.apache.commons:commons-lang3:3.17.0")
 
     // P6Spy
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.2")
