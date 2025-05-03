@@ -27,7 +27,7 @@ public class AuthApiV1 {
             @Valid @RequestBody SignUpRequestV1 signUpRequestV1
     ) {
         authService.signUp(signUpRequestV1);
-        return OkResponse.of("회원가입을 성공적으로 완료하였습니다.");
+        return OkResponse.of("회원가입을 완료했습니다.");
     }
 
     @PostMapping(AuthApiPaths.V1_SIGN_IN)
