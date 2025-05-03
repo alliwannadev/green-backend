@@ -26,6 +26,7 @@ dependencies {
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
 
     implementation(project(":supports:snowflake"))
+    implementation(project(":supports:data-serializer"))
 }
 
 // QueryDSL Build 옵션
