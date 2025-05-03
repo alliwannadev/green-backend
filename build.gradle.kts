@@ -42,6 +42,9 @@ subprojects {
 
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+		testRuntimeOnly("org.testcontainers:testcontainers:1.20.6")
+		testImplementation("org.testcontainers:junit-jupiter:1.20.6")
+		testImplementation("org.testcontainers:mysql:1.20.6")
 	}
 
 	tasks.withType<Test> {
