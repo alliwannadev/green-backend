@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequiredArgsConstructor
 @RestController
-public class AuthControllerV1 {
+public class AuthApiV1 {
 
     private final AuthService authService;
 
