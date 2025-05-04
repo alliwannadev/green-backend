@@ -1,0 +1,11 @@
+server.port: 9001
+spring:
+  application:
+    name: coupon-consumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: coupon-consumer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
