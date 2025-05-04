@@ -34,12 +34,19 @@ jobs:
       - name: Test with Gradle
         run: ./gradlew --info test
 
-      # 테스트 후 Result 출력
+      # 테스트 결과를 PR에 Comment로 등록
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: '**/build/test-results/**/*.xml'
+          files: '**/build/test-results/test/TEST-*.xml'
+
+      # 테스트 실패 시, 실패한 코드 라인에 Check Comment를 등록
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v5
+        if: always()
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
 
       # 캐시 파일 삭제
       - name: Cleanup Gradle Cache
