@@ -1,0 +1,10 @@
+### 회원가입 API 호출
+POST http://localhost:8080/v1/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678",
+  "name": "tester",
+  "phone": "01011112222"
+}
