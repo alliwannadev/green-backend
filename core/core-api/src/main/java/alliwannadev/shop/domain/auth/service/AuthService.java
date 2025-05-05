@@ -8,6 +8,9 @@ import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.user.domain.User;
 import alliwannadev.shop.domain.user.service.UserService;
+import alliwannadev.shop.supports.event.EventType;
+import alliwannadev.shop.supports.event.payload.UserSignedUpEventPayload;
+import alliwannadev.shop.supports.outbox.OutboxEventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,6 +26,7 @@ public class AuthService {
 
     private final UserService userService;
     private final JwtService jwtService;
+    private final OutboxEventPublisher outboxEventPublisher;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final PasswordEncoder passwordEncoder;
 
@@ -38,6 +42,16 @@ public class AuthService {
         User toBeSavedUser = signUpRequestV1.toUserEntity();
         toBeSavedUser.updatePassword(passwordEncoder.encode(toBeSavedUser.getPassword()));
         userService.saveIfNotExists(toBeSavedUser);
+
+        outboxEventPublisher.publish(
+                EventType.USER_SIGNED_UP,
+                UserSignedUpEventPayload
+                        .builder()
+                        .userId(toBeSavedUser.getUserId())
+                        .email(toBeSavedUser.getEmail())
+                        .build(),
+                toBeSavedUser.getUserId()
+        );
     }
 
     @Transactional(readOnly = true)
