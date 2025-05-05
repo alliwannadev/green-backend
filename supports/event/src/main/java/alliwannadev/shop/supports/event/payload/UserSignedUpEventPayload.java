@@ -14,4 +14,5 @@ public class UserSignedUpEventPayload implements EventPayload {
 
     private Long userId;
 
+    private String email;
 }

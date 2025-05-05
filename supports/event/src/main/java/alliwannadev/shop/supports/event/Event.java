@@ -31,17 +31,18 @@ public class Event<T extends EventPayload>  {
     }
 
     public static Event<EventPayload> fromJson(String json) {
-        EventRaw eventRaw = DataSerializer.deserialize(json, EventRaw.class);
-        if (eventRaw == null) {
+        RawEvent rawEvent = DataSerializer.deserialize(json, RawEvent.class);
+        if (rawEvent == null) {
             return null;
         }
 
         Event<EventPayload> event = new Event<>();
-        event.eventId = eventRaw.getEventId();
-        event.eventType = EventType.from(eventRaw.getEventType());
+        event.eventId = rawEvent.getEventId();
+        event.shardKey = rawEvent.getShardKey();
+        event.eventType = EventType.from(rawEvent.getEventType());
         event.payload =
                 DataSerializer.deserialize(
-                        eventRaw.getPayload(),
+                        rawEvent.getPayload(),
                         event.eventType.getPayloadClass()
                 );
 
@@ -49,8 +50,9 @@ public class Event<T extends EventPayload>  {
     }
 
     @Getter
-    private static class EventRaw {
+    private static class RawEvent {
         private Long eventId;
+        private Long shardKey;
         private String eventType;
         private Object payload;
     }
