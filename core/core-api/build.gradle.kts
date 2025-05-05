@@ -27,6 +27,8 @@ dependencies {
 
     implementation(project(":supports:snowflake"))
     implementation(project(":supports:data-serializer"))
+    implementation(project(":supports:event"))
+    implementation(project(":supports:transactional-outbox"))
 }
 
 // QueryDSL Build 옵션
