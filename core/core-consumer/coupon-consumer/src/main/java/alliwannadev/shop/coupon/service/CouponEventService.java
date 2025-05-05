@@ -14,10 +14,10 @@ import java.util.List;
 @Service
 public class CouponEventService {
 
-    private final List<EventHandler<EventPayload>> eventHandlers;
+    private final List<EventHandler> eventHandlers;
 
     public void handleEvent(Event<EventPayload> event) {
-        EventHandler<EventPayload> eventHandler = findEventHandler(event);
+        EventHandler eventHandler = findEventHandler(event);
         if (eventHandler == null) {
             return;
         }
@@ -25,7 +25,7 @@ public class CouponEventService {
         eventHandler.handle(event);
     }
 
-    private EventHandler<EventPayload> findEventHandler(Event<EventPayload> event) {
+    private EventHandler findEventHandler(Event<EventPayload> event) {
         return eventHandlers
                 .stream()
                 .filter(eventHandler -> eventHandler.supports(event))
