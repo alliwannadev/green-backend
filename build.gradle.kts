@@ -45,6 +45,7 @@ subprojects {
 		testRuntimeOnly("org.testcontainers:testcontainers:1.20.6")
 		testImplementation("org.testcontainers:junit-jupiter:1.20.6")
 		testImplementation("org.testcontainers:mysql:1.20.6")
+		testImplementation("org.testcontainers:kafka:1.20.6")
 	}
 
 	tasks.withType<Test> {
