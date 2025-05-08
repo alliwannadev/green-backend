@@ -5,6 +5,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.kafka:spring-kafka")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
 
@@ -27,6 +28,12 @@ dependencies {
 
     implementation(project(":supports:snowflake"))
     implementation(project(":supports:data-serializer"))
+    implementation(project(":supports:event"))
+    implementation(project(":supports:transactional-outbox"))
+
+    // Test
+    testImplementation("org.springframework.kafka:spring-kafka-test")
+    testImplementation("org.awaitility:awaitility")
 }
 
 // QueryDSL Build 옵션

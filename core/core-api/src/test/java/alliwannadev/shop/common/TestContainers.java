@@ -3,6 +3,7 @@ package alliwannadev.shop.common;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.kafka.KafkaContainer;
 
 public abstract class TestContainers {
 
@@ -19,8 +20,13 @@ public abstract class TestContainers {
                     .withInitScript("testcontainers/sql/init.sql")
                     .withReuse(true);
 
+    public static KafkaContainer KAFKA_CONTAINER =
+            new KafkaContainer("apache/kafka:3.8.0")
+                    .withReuse(true);
+
     static {
         MYSQL_CONTAINER.start();
+        KAFKA_CONTAINER.start();
     }
 
     @DynamicPropertySource
@@ -30,5 +36,8 @@ public abstract class TestContainers {
         registry.add("spring.datasource.username", MYSQL_CONTAINER::getUsername);
         registry.add("spring.datasource.password", MYSQL_CONTAINER::getPassword);
         registry.add("spring.jpa.hibernate.ddl-auto", () -> "none");
+
+        // Kafka
+        registry.add("spring.kafka.bootstrap-servers", KAFKA_CONTAINER::getBootstrapServers);
     }
 }
