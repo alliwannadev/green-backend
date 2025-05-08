@@ -1,9 +1,6 @@
-val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
-bootJar.enabled = false
-
 plugins {
 	java
-	id("org.springframework.boot") version "3.4.5"
+	id("org.springframework.boot") version "3.4.5" apply false
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -46,6 +43,14 @@ subprojects {
 		testImplementation("org.testcontainers:junit-jupiter:1.20.6")
 		testImplementation("org.testcontainers:mysql:1.20.6")
 		testImplementation("org.testcontainers:kafka:1.20.6")
+	}
+
+	tasks.getByName("bootJar") {
+		enabled = false
+	}
+
+	tasks.getByName("jar") {
+		enabled = true
 	}
 
 	tasks.withType<Test> {
