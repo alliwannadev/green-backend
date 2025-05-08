@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: 21
+          java-version: '21'
 
       # Gradle wrapper 파일 실행 권한 부여
       - name: Grant execute permission for gradlew
