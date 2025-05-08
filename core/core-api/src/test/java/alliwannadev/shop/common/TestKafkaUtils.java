@@ -34,19 +34,19 @@ public class TestKafkaUtils {
             int numPartitions,
             short replicationFactor
     ) {
-        // Create an admin client
+        // AdminClient 생성
         Properties properties = new Properties();
         properties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_CONTAINER.getBootstrapServers());
         AdminClient adminClient = AdminClient.create(properties);
 
-        // Define topic properties
-        NewTopic newTopic = new NewTopic(topicName, numPartitions, replicationFactor); // topic name, number of partitions, replication factor
+        // 토픽 속성 정의
+        NewTopic newTopic = new NewTopic(topicName, numPartitions, replicationFactor);
 
-        // Create topic
+        // 토픽 생성
         try {
             adminClient.createTopics(Collections.singletonList(newTopic)).all().get();
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("[TestKafkaUtils.createTopic] {}", e.getMessage(), e);
         }
     }
 
