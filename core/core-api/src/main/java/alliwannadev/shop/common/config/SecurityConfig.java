@@ -4,10 +4,12 @@ import alliwannadev.shop.common.security.JwtAccessDeniedHandler;
 import alliwannadev.shop.common.security.JwtAuthenticationEntryPoint;
 import alliwannadev.shop.common.security.JwtAuthenticationFilter;
 import alliwannadev.shop.common.security.JwtTokenProvider;
+import alliwannadev.shop.domain.product.controller.ProductApiPaths;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,7 +43,7 @@ public class SecurityConfig {
     public RequestMatcher permitAllEndPointMatcher() {
         String[] permitAllUriPatterns = {
                 "/", "/favicon.ico", "/error",
-                "/v1/auth/sign-in", "/v1/auth/sign-up",
+                "/v1/auth/sign-in", "/v1/auth/sign-up"
         };
 
         List<AntPathRequestMatcher> antPathRequestMatchers =
@@ -50,9 +52,11 @@ public class SecurityConfig {
                                 .map(AntPathRequestMatcher::new)
                                 .toList()
                 );
-//        antPathRequestMatchers.addAll(List.of(
-//                new AntPathRequestMatcher("/samples", HttpMethod.GET.name()),
-//        ));
+        antPathRequestMatchers.addAll(List.of(
+                new AntPathRequestMatcher(ProductApiPaths.V1_PRODUCTS, HttpMethod.GET.name()),
+                new AntPathRequestMatcher(ProductApiPaths.V1_PRODUCTS_INFINITE_SCROLL, HttpMethod.GET.name()),
+                new AntPathRequestMatcher(ProductApiPaths.V1_PRODUCTS_BY_PRODUCT_ID, HttpMethod.GET.name())
+        ));
 
         return new OrRequestMatcher(
                 antPathRequestMatchers.toArray(AntPathRequestMatcher[]::new)
