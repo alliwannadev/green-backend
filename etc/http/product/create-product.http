@@ -1,0 +1,64 @@
+### [CASE 1] 상품 등록
+POST http://localhost:8080/v1/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6MTg4OTUwNDM0ODczNzUzNiwiZXhwIjoxNzQ3MDQ5OTk3fQ.YB1_Ikugw33rlM98gqCD0uaYXoiwtAvddJmSWT5UCNU
+
+{
+  "categoryId": 1,
+  "productCode": "NIKE-T-SHIRT-001",
+  "productName": "나이키 티셔츠",
+  "modelName": "MODEL-NAME-001",
+  "originalPrice": 100,
+  "sellingPrice": 150,
+  "description": "나이키 티셔츠 입니다.",
+  "options": [
+    {
+      "optionCode": "COLOR",
+      "optionName": "색상",
+      "optionValue": "BLACK"
+    },
+    {
+      "optionCode": "SIZE",
+      "optionName": "상의 사이즈",
+      "optionValue": "M"
+    }
+  ],
+  "optionCombinations": [
+    {
+      "optionCode1": "COLOR",
+      "optionName1": "색상",
+      "optionValue1": "BLACK",
+      "optionCode2": "SIZE",
+      "optionName2": "상의 사이즈",
+      "optionValue2": "M",
+      "optionCode3": "",
+      "optionName3": "",
+      "optionValue3": "",
+      "optionCode4": "",
+      "optionName4": "",
+      "optionValue4": "",
+      "optionCode5": "",
+      "optionName5": "",
+      "optionValue5": "",
+      "stockQuantity": 10,
+      "optionManagementCode": "COLOR-BLACK/SIZE-M"
+    }
+  ]
+}
+
+### [CASE 2] 상품 등록
+POST http://localhost:8080/v1/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6MTg4OTUwNDM0ODczNzUzNiwiZXhwIjoxNzQ3MDQ5OTk3fQ.YB1_Ikugw33rlM98gqCD0uaYXoiwtAvddJmSWT5UCNU
+
+{
+  "categoryId": 1,
+  "productCode": "NIKE-T-SHIRT-002",
+  "productName": "나이키 티셔츠 2번",
+  "modelName": "MODEL-NAME-002",
+  "originalPrice": 100,
+  "sellingPrice": 150,
+  "description": "나이키 티셔츠 2 입니다.",
+  "options": [],
+  "optionCombinations": []
+}
