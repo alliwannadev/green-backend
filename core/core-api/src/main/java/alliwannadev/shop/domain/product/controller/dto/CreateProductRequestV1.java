@@ -1,5 +1,7 @@
 package alliwannadev.shop.domain.product.controller.dto;
 
+import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,8 +16,8 @@ public record CreateProductRequestV1(
         @NotNull Long originalPrice,
         @NotNull Long sellingPrice,
         @NotBlank String description,
-        List<CreateProductOption> options,
-        List<CreateProductOptionCombination> optionCombinations
+        @NotNull List<CreateProductOption> options,
+        @NotNull List<CreateProductOptionCombination> optionCombinations
 ) {
 
     public record CreateProductOption(
@@ -57,7 +59,7 @@ public record CreateProductRequestV1(
                 description,
                 options
                         .stream()
-                        .map(option -> new CreateProductParam.CreateProductOptionParam(
+                        .map(option -> new CreateProductOptionParam(
                                 option.optionCode(),
                                 option.optionName(),
                                 option.optionValue()
@@ -65,7 +67,7 @@ public record CreateProductRequestV1(
                         .toList(),
                 optionCombinations
                         .stream()
-                        .map(combination -> new CreateProductParam.CreateProductOptionCombinationParam(
+                        .map(combination -> new CreateProductOptionCombinationParam(
                                 combination.optionCode1(),
                                 combination.optionName1(),
                                 combination.optionValue1(),

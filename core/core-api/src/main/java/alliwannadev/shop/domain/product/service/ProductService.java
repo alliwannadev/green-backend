@@ -3,6 +3,8 @@ package alliwannadev.shop.domain.product.service;
 import alliwannadev.shop.common.dto.InfiniteScrollCond;
 import alliwannadev.shop.common.error.BusinessException;
 import alliwannadev.shop.common.error.ErrorCode;
+import alliwannadev.shop.domain.option.service.ProductOptionCombinationService;
+import alliwannadev.shop.domain.option.service.ProductOptionService;
 import alliwannadev.shop.domain.product.model.Product;
 import alliwannadev.shop.domain.product.repository.ProductQueryRepository;
 import alliwannadev.shop.domain.product.repository.ProductRepository;
@@ -22,12 +24,15 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    private final ProductOptionService productOptionService;
+    private final ProductOptionCombinationService productOptionCombinationService;
+
     private final ProductRepository productRepository;
     private final ProductQueryRepository productQueryRepository;
 
     @Transactional
     public void createOne(CreateProductParam createProductParam) {
-        productRepository.save(
+        Product product = productRepository.save(
                 Product.of(
                         createProductParam.productCode(),
                         createProductParam.productName(),
@@ -37,6 +42,15 @@ public class ProductService {
                         createProductParam.description(),
                         true
                 )
+        );
+
+        productOptionService.createAll(
+                product,
+                createProductParam.options()
+        );
+        productOptionCombinationService.createAll(
+                product,
+                createProductParam.optionCombinations()
         );
     }
 
