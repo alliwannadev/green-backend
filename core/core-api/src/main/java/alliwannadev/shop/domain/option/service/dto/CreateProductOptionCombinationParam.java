@@ -42,7 +42,7 @@ public record CreateProductOptionCombinationParam(
                 toOptionsText(
                         productOptions,
                         option ->
-                                "%s-%s-%s".formatted(
+                                "%s_%s_%s".formatted(
                                         option.optionName,
                                         option.optionCode,
                                         option.optionValue
@@ -52,16 +52,16 @@ public record CreateProductOptionCombinationParam(
         String optionCodeValues = toOptionsText(
                 productOptions,
                 option ->
-                        "%s-%s".formatted(
+                        "%s_%s".formatted(
                                 option.optionCode,
                                 option.optionValue
                         ),
-                "-"
+                "_"
         );
-        String combinationCode = product.getProductId() + "-" + optionCodeValues;
+        String combinationCode = product.getProductId() + "_" + optionCodeValues;
         char[] charsOfOptionCodeValues =
                 optionCodeValues
-                        .replaceAll("-", "")
+                        .replaceAll("_", "")
                         .toCharArray();
         Arrays.sort(charsOfOptionCodeValues);
 
@@ -69,7 +69,7 @@ public record CreateProductOptionCombinationParam(
                 product,
                 selectedOptions,
                 combinationCode,
-                product.getProductId() + "-" + String.valueOf(charsOfOptionCodeValues),
+                product.getProductId() + "_" + String.valueOf(charsOfOptionCodeValues),
                 optionManagementCode
         );
     }
