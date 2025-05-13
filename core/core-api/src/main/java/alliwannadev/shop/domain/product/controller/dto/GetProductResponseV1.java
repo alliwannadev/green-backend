@@ -7,7 +7,7 @@ public record GetProductResponseV1(
         String productCode,
         String productName,
         String modelName,
-        Long purchasePrice,
+        Long originalPrice,
         Long sellingPrice,
         String description,
         Boolean isDisplayed

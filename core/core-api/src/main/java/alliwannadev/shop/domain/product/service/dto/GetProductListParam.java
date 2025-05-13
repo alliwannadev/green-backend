@@ -39,8 +39,11 @@ public record GetProductListParam(
             ProductOptionCode code,
             List<String> optionValues
     ) {
-        return optionValues
-                .stream()
+        if (ObjectUtils.isEmpty(optionValues)) {
+            return List.of();
+        }
+
+        return optionValues.stream()
                 .map(optionValue -> new GetProductListCond.OptionCond(code.getCode(), optionValue))
                 .toList();
     }
