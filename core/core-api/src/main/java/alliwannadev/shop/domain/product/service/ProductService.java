@@ -56,13 +56,15 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Page<GetProductResult> getAll(
-            GetProductListParam getProductListParam,
+            GetProductListParam param,
             Pageable pageable
     ) {
-        Page<GetProductDto> result = productQueryRepository.findAll(
-                getProductListParam.toCondition(getProductListParam.categoryPath()),
-                pageable
-        );
+        Page<GetProductDto> result =
+                productQueryRepository
+                        .findAll(
+                                param.toCondition(param.categoryPath()),
+                                pageable
+                        );
 
         return result.map(GetProductResult::fromDto);
     }

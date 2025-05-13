@@ -1,5 +1,6 @@
 package alliwannadev.shop.domain.product.service.dto;
 
+import alliwannadev.shop.common.constant.ProductOptionCode;
 import alliwannadev.shop.domain.product.repository.dto.GetProductListCond;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -22,14 +23,25 @@ public record GetProductListParam(
     public GetProductListCond toCondition(String categoryPath) {
         return new GetProductListCond(
                 categoryPath,
-                colors,
-                sizes,
-                ObjectUtils.isEmpty(priceRange) ? null :
+                toOptionCondList(ProductOptionCode.COLOR, colors),
+                toOptionCondList(ProductOptionCode.SIZE, sizes),
+                ObjectUtils.isEmpty(priceRange) ?
+                        null :
                         new GetProductListCond.PriceRange(
-                                priceRange.minPrice,
-                                priceRange.maxPrice
+                                priceRange.minPrice == null ? Long.MIN_VALUE : priceRange.minPrice,
+                                priceRange.maxPrice == null ? Long.MAX_VALUE : priceRange.maxPrice
                         ),
                 isInStock
         );
+    }
+
+    private List<GetProductListCond.OptionCond> toOptionCondList(
+            ProductOptionCode code,
+            List<String> optionValues
+    ) {
+        return optionValues
+                .stream()
+                .map(optionValue -> new GetProductListCond.OptionCond(code.getCode(), optionValue))
+                .toList();
     }
 }
