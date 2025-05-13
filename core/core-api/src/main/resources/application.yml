@@ -3,6 +3,10 @@ spring:
     active: local
   application:
     name: core-api
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 # 기본적으로 P6Spy 비활성화
 decorator:
