@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OutboxEventPublisher {
 
-    private final Snowflake snowflake = new Snowflake(1L, 1L);
+    private final Snowflake snowflake;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public void publish(

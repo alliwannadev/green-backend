@@ -1,0 +1,5 @@
+### 1. 상품 리스트 조회 (무한 스크롤) - 첫 번째 페이지
+GET http://localhost:8080/v1/products/infinite-scroll?categoryPath=1&pageSize=10
+
+### 2. 상품 리스트 조회 (무한 스크롤) - 두 번째 페이지
+GET http://localhost:8080/v1/products/infinite-scroll?categoryPath=1&pageSize=10&lastCursor=3248992607670272

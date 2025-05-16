@@ -21,7 +21,7 @@ class SnowflakeTest {
     @Test
     void testNextIdOfSnowflake() {
         // given
-        Snowflake snowflake = new Snowflake(1L, 1L);
+        Snowflake snowflake = new Snowflake(1L);
         List<Future<List<Long>>> futures = new ArrayList<>();
         int requestCount = 1000;
         int idCount = 1000;

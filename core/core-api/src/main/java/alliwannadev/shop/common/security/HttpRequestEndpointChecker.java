@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public class HttpRequestEndpointChecker {
 
         for (HandlerMapping handlerMapping : handlerMappings) {
             try {
-                HandlerExecutionChain foundHandler = handlerMapping.getHandler(request);
-                if (foundHandler != null) {
-                    return true;
+                HandlerExecutionChain handlerExecutionChain = handlerMapping.getHandler(request);
+                if (handlerExecutionChain != null) {
+                    Object foundHandler = handlerExecutionChain.getHandler();
+                    return !(foundHandler instanceof ResourceHttpRequestHandler);
                 }
             } catch (Exception ex) {
                 return false;

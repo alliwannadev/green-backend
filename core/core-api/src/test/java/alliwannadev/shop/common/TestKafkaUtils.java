@@ -100,7 +100,7 @@ public class TestKafkaUtils {
             MessageRelay messageRelay
     ) {
         BDDMockito.will(invocation -> {
-                    Snowflake snowflake = new Snowflake(1L, 1L);
+                    Snowflake snowflake = new Snowflake(1L);
                     EventType type = invocation.getArgument(0);
                     EventPayload payload = invocation.getArgument(1);
                     Long shardKey = invocation.getArgument(2);
