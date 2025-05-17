@@ -132,7 +132,7 @@ class ProductApiV1Test extends TestContainers {
                         new CreateProductOptionParam("SIZE", "사이즈", "M")
                 ),
                 List.of(
-                        new CreateProductOptionCombinationParam("COLOR", "색상", "BLACK", "SIZe", "사이즈", "M", "", "", "", "", "", "", "", "", "", 10L, "COLOR-BLACK/SIZE-M")
+                        new CreateProductOptionCombinationParam("COLOR", "색상", "BLACK", "SIZE", "사이즈", "M", "", "", "", "", "", "", "", "", "", 10L, "COLOR-BLACK/SIZE-M")
                 )
         );
         testProductHelper.createProduct(createProductParam);
