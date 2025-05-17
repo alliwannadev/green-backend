@@ -15,12 +15,14 @@ public record CreateCartItemParam(
 ) {
 
     public CartItem toEntity(
-            Cart cart
+            Cart cart,
+            Long productOptionCombinationId
     ) {
         return CartItem.of(
                 cart,
                 productId,
                 productName,
+                productOptionCombinationId,
                 selectedOptions,
                 thumbnailUrl,
                 price,
