@@ -5,6 +5,7 @@ import alliwannadev.shop.domain.cart.service.dto.CreateCartItemParam;
 public record CreateCartItemRequestV1(
         Long productId,
         String productName,
+        String selectedOptions,
         String thumbnailUrl,
         Long price,
         Long quantity,
@@ -16,6 +17,7 @@ public record CreateCartItemRequestV1(
         return new CreateCartItemParam(
                 productId,
                 productName,
+                selectedOptions,
                 thumbnailUrl,
                 price,
                 quantity,

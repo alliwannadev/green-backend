@@ -43,9 +43,10 @@ public class CartItemService {
     ) {
         CartItem newCartItem = createCartItemParam.toEntity(cart);
         cartItemRepository
-                .findOneByCartIdAndProductId(
+                .findOne(
                         cartId,
-                        newCartItem.getProductId()
+                        newCartItem.getProductId(),
+                        newCartItem.getSelectedOptions()
                 )
                 .ifPresentOrElse(
                         cartItem -> cartItem.updateQuantity(newCartItem.getQuantity()),

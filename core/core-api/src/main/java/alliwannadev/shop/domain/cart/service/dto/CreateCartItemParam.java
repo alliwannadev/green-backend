@@ -6,6 +6,7 @@ import alliwannadev.shop.domain.cart.model.CartItem;
 public record CreateCartItemParam(
         Long productId,
         String productName,
+        String selectedOptions,
         String thumbnailUrl,
         Long price,
         Long quantity,
@@ -20,6 +21,7 @@ public record CreateCartItemParam(
                 cart,
                 productId,
                 productName,
+                selectedOptions,
                 thumbnailUrl,
                 price,
                 quantity,
