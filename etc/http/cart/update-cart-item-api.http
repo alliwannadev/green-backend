@@ -1,0 +1,14 @@
+### 장바구니 항목 1건 변경
+PUT http://localhost:8080/v1/cart-items/6069633706627072
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NTcxMTE5MzE4ODYwMTg1NiwiZXhwIjoxNzQ3NDU2NzIzfQ.oW0lrQGsvPE2Bs4waGCp8l6Suc6UJK16cUvVZYXmUgQ
+
+{
+  "productId": 1,
+  "productName": "나이키 티셔츠",
+  "price": 1000,
+  "quantity": 3,
+  "amount": 3000,
+  "discountedAmount": 0,
+  "paymentAmount": 3000
+}
