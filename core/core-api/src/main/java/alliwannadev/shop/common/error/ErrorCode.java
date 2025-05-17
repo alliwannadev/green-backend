@@ -26,7 +26,11 @@ public enum ErrorCode {
     INVALID_ID_OR_PASSWORD(404, "AUTH-005", "아이디 또는 비밀번호가 일치하지 않습니다."),
 
     // Product
-    PRODUCT_NOT_FOUND(404, "PRODUCT-001", "요청하신 상품 정보를 찾을 수 없습니다.");
+    PRODUCT_NOT_FOUND(404, "PRODUCT-001", "요청하신 상품 정보를 찾을 수 없습니다."),
+
+    // CART
+    CART_NOT_FOUND(404, "CART-001", "요청하신 장바구니 정보를 찾을 수 없습니다."),
+    CART_ITEM_NOT_FOUND(404, "CART-002", "요청하신 장바구니 항목 정보를 찾을 수 없습니다.");
 
     private final int status;
 
