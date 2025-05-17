@@ -24,7 +24,7 @@ services:
       - 6379:6379
     volumes:
       - ./redis/data:/data
-      - ./redis/conf:/conf
+      - ./redis/conf/redis.conf:/conf/redis.conf
     labels:
       - "name=redis"
       - "mode=standalone"
