@@ -1,5 +1,5 @@
 ### 로그인 API 호출
-POST http://localhost:8080/v1/auth/sign-in
+POST {{host}}/v1/auth/sign-in
 Content-Type: application/json
 
 {

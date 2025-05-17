@@ -1,0 +1,13 @@
+### 장바구니 항목 1건 변경
+PUT {{host}}0/v1/cart-items/6100402814586880
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NjEyMjM3ODU1NTgyMjA4MCwiZXhwIjoxNzQ3NDcyMjIzfQ.Eg2Jji7MdWIxPzdEHct5g6DqOHVNsgiZcEqeZ1_TUmo
+
+{
+  "productId": 6122529005506560,
+  "price": 1000,
+  "quantity": 3,
+  "amount": 3000,
+  "discountedAmount": 0,
+  "paymentAmount": 3000
+}

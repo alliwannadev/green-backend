@@ -1,0 +1,4 @@
+### 장바구니 항목 1건 삭제
+DELETE {{host}}/v1/cart-items/5711387611369472
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NjEyMjM3ODU1NTgyMjA4MCwiZXhwIjoxNzQ3NDcyMjIzfQ.Eg2Jji7MdWIxPzdEHct5g6DqOHVNsgiZcEqeZ1_TUmo

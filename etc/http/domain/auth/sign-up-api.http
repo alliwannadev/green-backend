@@ -1,5 +1,5 @@
 ### 회원가입 API 호출
-POST http://localhost:8080/v1/auth/sign-up
+POST {{host}}/v1/auth/sign-up
 Content-Type: application/json
 
 {
