@@ -7,12 +7,15 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-> {% client.global.set("accessToken", response.body.data.accessToken); %}
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
 
 ### 2. 주문 등록 API 호출
 POST {{host}}/v1/orders
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: {{accessToken}}
 
 {
   "receiverName": "테스터",
