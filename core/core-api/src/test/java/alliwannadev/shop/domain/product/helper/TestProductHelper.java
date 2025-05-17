@@ -21,7 +21,7 @@ public class TestProductHelper {
     private final TestProductOptionCombinationHelper testProductOptionCombinationHelper;
 
     @Transactional
-    public void createProduct(CreateProductParam createProductParam) {
+    public Product createProduct(CreateProductParam createProductParam) {
         Product product = productRepository.save(
                 Product.of(
                         createProductParam.productCode(),
@@ -43,6 +43,8 @@ public class TestProductHelper {
                 product,
                 createProductParam.optionCombinations()
         );
+
+        return product;
     }
 
     @Transactional(readOnly = true)

@@ -27,6 +27,7 @@ public enum ErrorCode {
 
     // Product
     PRODUCT_NOT_FOUND(404, "PRODUCT-001", "요청하신 상품 정보를 찾을 수 없습니다."),
+    PRODUCT_OPTION_COMBINATION_NOT_FOUND(404, "PRODUCT-002", "요청하신 상품 옵션 조합 정보를 찾을 수 없습니다."),
 
     // CART
     CART_NOT_FOUND(404, "CART-001", "요청하신 장바구니 정보를 찾을 수 없습니다."),

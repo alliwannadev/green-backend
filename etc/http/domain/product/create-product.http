@@ -1,7 +1,18 @@
-### [CASE 1] 상품 등록
-POST http://localhost:8080/v1/products
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NDQzMzM5Mzc4NTkwMTA1NiwiZXhwIjoxNzQ3MTEyOTQ0fQ.Kh_kfrzzKZlmbNy1Y2rhK1Z4bF_cebv6BLAZsAG7tKk
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {% client.global.set("accessToken", response.body.data.accessToken); %}
+
+### 2. [CASE 2] 상품 등록
+POST {{host}}/v1/products
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 {
   "categoryId": 1,
@@ -46,10 +57,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhd
   ]
 }
 
-### [CASE 2] 상품 등록
+### 3. [CASE 2] 상품 등록
 POST http://localhost:8080/v1/products
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6MTg4OTUwNDM0ODczNzUzNiwiZXhwIjoxNzQ3MDQ5OTk3fQ.YB1_Ikugw33rlM98gqCD0uaYXoiwtAvddJmSWT5UCNU
+Authorization: Bearer {{accessToken}}
 
 {
   "categoryId": 1,
@@ -63,10 +74,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhd
   "optionCombinations": []
 }
 
-### [CASE 3] 상품 등록
+### 3. [CASE 3] 상품 등록
 POST http://localhost:8080/v1/products
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NDQzMzM5Mzc4NTkwMTA1NiwiZXhwIjoxNzQ3MTEyOTQ0fQ.Kh_kfrzzKZlmbNy1Y2rhK1Z4bF_cebv6BLAZsAG7tKk
+Authorization: Bearer {{accessToken}}
 
 {
   "categoryId": 1,

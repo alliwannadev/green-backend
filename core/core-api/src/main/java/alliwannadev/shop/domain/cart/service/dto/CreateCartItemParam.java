@@ -6,6 +6,7 @@ import alliwannadev.shop.domain.cart.model.CartItem;
 public record CreateCartItemParam(
         Long productId,
         String productName,
+        String selectedOptions,
         String thumbnailUrl,
         Long price,
         Long quantity,
@@ -14,12 +15,15 @@ public record CreateCartItemParam(
 ) {
 
     public CartItem toEntity(
-            Cart cart
+            Cart cart,
+            Long productOptionCombinationId
     ) {
         return CartItem.of(
                 cart,
                 productId,
                 productName,
+                productOptionCombinationId,
+                selectedOptions,
                 thumbnailUrl,
                 price,
                 quantity,

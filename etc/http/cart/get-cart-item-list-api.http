@@ -1,4 +1,0 @@
-### 장바구니 항목 리스트 조회
-GET http://localhost:8080/v1/cart-items
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6NTcxMTE5MzE4ODYwMTg1NiwiZXhwIjoxNzQ3NDU2NzIzfQ.oW0lrQGsvPE2Bs4waGCp8l6Suc6UJK16cUvVZYXmUgQ

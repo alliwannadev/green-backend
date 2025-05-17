@@ -24,11 +24,13 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             from    CartItem cartItem
             where   cartItem.cart.cartId = :cartId
             and     cartItem.productId = :productId
+            and     cartItem.selectedOptions = :selectedOptions
             """
     )
-    Optional<CartItem> findOneByCartIdAndProductId(
+    Optional<CartItem> findOne(
             Long cartId,
-            Long productId
+            Long productId,
+            String selectedOptions
     );
 }
 

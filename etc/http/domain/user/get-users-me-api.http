@@ -1,0 +1,15 @@
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {% client.global.set("accessToken", response.body.data.accessToken); %}
+
+### 2. 내 회원 정보 조회 API 호출
+GET {{host}}/v1/users/me
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}

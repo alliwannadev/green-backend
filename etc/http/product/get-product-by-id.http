@@ -1,2 +1,0 @@
-### 상품 1건 조회
-GET http://localhost:8080/v1/products/3248992737693696
