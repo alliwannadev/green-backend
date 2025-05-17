@@ -1,4 +1,15 @@
-### 내 회원 정보 조회 API 호출
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {% client.global.set("accessToken", response.body.data.accessToken); %}
+
+### 2. 내 회원 정보 조회 API 호출
 GET {{host}}/v1/users/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0ZXJAdGVzdC5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsInVzZXJJZCI6MjkyOTAxNjYxODM5MzYwLCJleHAiOjE3NDYwNzk2MjF9.W9b7xiwVb8O6KACkyx96Ms3wtnvLH8tOU2bPPTJno8Q
+Authorization: Bearer {{accessToken}}
