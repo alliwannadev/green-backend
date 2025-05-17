@@ -31,6 +31,11 @@ public class ProductOptionCombinationService {
     }
 
     @Transactional(readOnly = true)
+    public Optional<ProductOptionCombination> getByCombinationId(Long productCombinationId) {
+        return productOptionCombinationRepository.findById(productCombinationId);
+    }
+
+    @Transactional(readOnly = true)
     public Optional<ProductOptionCombination> getByCond(
             Long productId,
             String selectedOptions
