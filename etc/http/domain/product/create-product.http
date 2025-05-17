@@ -60,96 +60,96 @@ Authorization: {{accessToken}}
   ]
 }
 
-### 3. [CASE 2] 상품 등록
-POST http://localhost:8080/v1/products
-Content-Type: application/json
-Authorization: {{accessToken}}
-
-{
-  "categoryId": 1,
-  "productCode": "NIKE-T-SHIRT-002",
-  "productName": "나이키 티셔츠 2번",
-  "modelName": "MODEL-NAME-002",
-  "originalPrice": 100,
-  "sellingPrice": 150,
-  "description": "나이키 티셔츠 2 입니다.",
-  "options": [],
-  "optionCombinations": []
-}
-
-### 3. [CASE 3] 상품 등록
-POST http://localhost:8080/v1/products
-Content-Type: application/json
-Authorization: {{accessToken}}
-
-{
-  "categoryId": 1,
-  "productCode": "ADIDAS-T-SHIRT-001",
-  "productName": "아디다스 티셔츠",
-  "modelName": "MODEL-NAME-010",
-  "originalPrice": 100,
-  "sellingPrice": 150,
-  "description": "아디다스 티셔츠 입니다.",
-  "options": [
-    {
-      "optionCode": "COLOR",
-      "optionName": "색상",
-      "optionValue": "BLACK"
-    },
-    {
-      "optionCode": "SIZE",
-      "optionName": "상의 사이즈",
-      "optionValue": "M"
-    },
-    {
-      "optionCode": "COLOR",
-      "optionName": "색상",
-      "optionValue": "WHITE"
-    },
-    {
-      "optionCode": "SIZE",
-      "optionName": "상의 사이즈",
-      "optionValue": "L"
-    }
-  ],
-  "optionCombinations": [
-    {
-      "optionCode1": "COLOR",
-      "optionName1": "색상",
-      "optionValue1": "BLACK",
-      "optionCode2": "SIZE",
-      "optionName2": "상의 사이즈",
-      "optionValue2": "M",
-      "optionCode3": "",
-      "optionName3": "",
-      "optionValue3": "",
-      "optionCode4": "",
-      "optionName4": "",
-      "optionValue4": "",
-      "optionCode5": "",
-      "optionName5": "",
-      "optionValue5": "",
-      "stockQuantity": 10,
-      "optionManagementCode": "COLOR-BLACK/SIZE-M"
-    },
-    {
-      "optionCode1": "COLOR",
-      "optionName1": "색상",
-      "optionValue1": "WHITE",
-      "optionCode2": "SIZE",
-      "optionName2": "상의 사이즈",
-      "optionValue2": "L",
-      "optionCode3": "",
-      "optionName3": "",
-      "optionValue3": "",
-      "optionCode4": "",
-      "optionName4": "",
-      "optionValue4": "",
-      "optionCode5": "",
-      "optionName5": "",
-      "optionValue5": "",
-      "stockQuantity": 10,
-      "optionManagementCode": "COLOR-WHITE/SIZE-L"
-    }
-  ]
-}
+#### 3. [CASE 2] 상품 등록
+#POST http://localhost:8080/v1/products
+#Content-Type: application/json
+#Authorization: {{accessToken}}
+#
+#{
+#  "categoryId": 1,
+#  "productCode": "NIKE-T-SHIRT-002",
+#  "productName": "나이키 티셔츠 2번",
+#  "modelName": "MODEL-NAME-002",
+#  "originalPrice": 100,
+#  "sellingPrice": 150,
+#  "description": "나이키 티셔츠 2 입니다.",
+#  "options": [],
+#  "optionCombinations": []
+#}
+#
+#### 3. [CASE 3] 상품 등록
+#POST http://localhost:8080/v1/products
+#Content-Type: application/json
+#Authorization: {{accessToken}}
+#
+#{
+#  "categoryId": 1,
+#  "productCode": "ADIDAS-T-SHIRT-001",
+#  "productName": "아디다스 티셔츠",
+#  "modelName": "MODEL-NAME-010",
+#  "originalPrice": 100,
+#  "sellingPrice": 150,
+#  "description": "아디다스 티셔츠 입니다.",
+#  "options": [
+#    {
+#      "optionCode": "COLOR",
+#      "optionName": "색상",
+#      "optionValue": "BLACK"
+#    },
+#    {
+#      "optionCode": "SIZE",
+#      "optionName": "상의 사이즈",
+#      "optionValue": "M"
+#    },
+#    {
+#      "optionCode": "COLOR",
+#      "optionName": "색상",
+#      "optionValue": "WHITE"
+#    },
+#    {
+#      "optionCode": "SIZE",
+#      "optionName": "상의 사이즈",
+#      "optionValue": "L"
+#    }
+#  ],
+#  "optionCombinations": [
+#    {
+#      "optionCode1": "COLOR",
+#      "optionName1": "색상",
+#      "optionValue1": "BLACK",
+#      "optionCode2": "SIZE",
+#      "optionName2": "상의 사이즈",
+#      "optionValue2": "M",
+#      "optionCode3": "",
+#      "optionName3": "",
+#      "optionValue3": "",
+#      "optionCode4": "",
+#      "optionName4": "",
+#      "optionValue4": "",
+#      "optionCode5": "",
+#      "optionName5": "",
+#      "optionValue5": "",
+#      "stockQuantity": 10,
+#      "optionManagementCode": "COLOR-BLACK/SIZE-M"
+#    },
+#    {
+#      "optionCode1": "COLOR",
+#      "optionName1": "색상",
+#      "optionValue1": "WHITE",
+#      "optionCode2": "SIZE",
+#      "optionName2": "상의 사이즈",
+#      "optionValue2": "L",
+#      "optionCode3": "",
+#      "optionName3": "",
+#      "optionValue3": "",
+#      "optionCode4": "",
+#      "optionName4": "",
+#      "optionValue4": "",
+#      "optionCode5": "",
+#      "optionName5": "",
+#      "optionValue5": "",
+#      "stockQuantity": 10,
+#      "optionManagementCode": "COLOR-WHITE/SIZE-L"
+#    }
+#  ]
+#}
