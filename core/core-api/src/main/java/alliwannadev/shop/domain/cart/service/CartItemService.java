@@ -9,6 +9,8 @@ import alliwannadev.shop.domain.cart.repository.CartRepository;
 import alliwannadev.shop.domain.cart.service.dto.CreateCartItemParam;
 import alliwannadev.shop.domain.cart.service.dto.GetCartItemListResult;
 import alliwannadev.shop.domain.cart.service.dto.UpdateCartItemParam;
+import alliwannadev.shop.domain.option.model.ProductOptionCombination;
+import alliwannadev.shop.domain.option.service.ProductOptionCombinationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class CartItemService {
+
+    private final ProductOptionCombinationService productOptionCombinationService;
 
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
@@ -41,7 +45,19 @@ public class CartItemService {
             Cart cart,
             CreateCartItemParam createCartItemParam
     ) {
-        CartItem newCartItem = createCartItemParam.toEntity(cart);
+        ProductOptionCombination productOptionCombination =
+                productOptionCombinationService
+                        .getByCond(
+                                createCartItemParam.productId(),
+                                createCartItemParam.selectedOptions()
+                        )
+                        .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_OPTION_COMBINATION_NOT_FOUND));
+
+        CartItem newCartItem =
+                createCartItemParam.toEntity(
+                        cart,
+                        productOptionCombination.getProductOptionCombinationId()
+                );
         cartItemRepository
                 .findOne(
                         cartId,

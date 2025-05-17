@@ -23,6 +23,8 @@ public class CartItem {
 
     private String productName;
 
+    private Long productOptionCombinationId;
+
     private String selectedOptions;
 
     private String thumbnailUrl;
@@ -42,6 +44,7 @@ public class CartItem {
             Cart cart,
             Long productId,
             String productName,
+            Long productOptionCombinationId,
             String selectedOptions,
             String thumbnailUrl,
             Long quantity,
@@ -53,6 +56,7 @@ public class CartItem {
         this.cart = cart;
         this.productId = productId;
         this.productName = productName;
+        this.productOptionCombinationId = productOptionCombinationId;
         this.selectedOptions = selectedOptions;
         this.thumbnailUrl = thumbnailUrl;
         this.quantity = quantity;
@@ -66,6 +70,7 @@ public class CartItem {
             Cart cart,
             Long productId,
             String productName,
+            Long productOptionCombinationId,
             String selectedOptions,
             String thumbnailUrl,
             Long price,
@@ -76,6 +81,7 @@ public class CartItem {
         CartItem cartItem = CartItem.builder()
                 .productId(productId)
                 .productName(productName)
+                .productOptionCombinationId(productOptionCombinationId)
                 .selectedOptions(selectedOptions)
                 .thumbnailUrl(thumbnailUrl)
                 .price(price)
