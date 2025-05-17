@@ -14,6 +14,7 @@ public enum ErrorCode {
     DATA_ACCESS_ERROR(500, "COMMON-004", "요청하신 데이터에 접근하는 과정에서 에러가 발생했습니다."),
     INTERNAL_SERVER_ERROR(500, "COMMON-005", "서버에 에러가 발생했습니다."),
     END_POINT_NOT_FOUND(500, "COMMON-006", "요청하신 엔드포인트를 찾을 수 없습니다."),
+    DATE_TIME_PARSING_ERROR(400, "COMMON-007", "날짜 및 시간을 파싱하는 과정에서 에러가 발생했습니다."),
 
     // User
     EMAIL_DUPLICATION(400, "USER-001", "중복된 이메일입니다."),
@@ -31,7 +32,11 @@ public enum ErrorCode {
 
     // CART
     CART_NOT_FOUND(404, "CART-001", "요청하신 장바구니 정보를 찾을 수 없습니다."),
-    CART_ITEM_NOT_FOUND(404, "CART-002", "요청하신 장바구니 항목 정보를 찾을 수 없습니다.");
+    CART_ITEM_NOT_FOUND(404, "CART-002", "요청하신 장바구니 항목 정보를 찾을 수 없습니다."),
+
+    // Stock
+    STOCK_NOT_FOUND(404, "STOCK-001", "요청하신 재고 정보를 찾을 수 없습니다."),
+    OUT_OF_STOCK(400, "STOCK-002", "해당 상품의 재고가 부족합니다.");
 
     private final int status;
 
