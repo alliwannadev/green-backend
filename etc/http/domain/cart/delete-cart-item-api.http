@@ -7,9 +7,12 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-> {% client.global.set("accessToken", response.body.data.accessToken); %}
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
 
 ### 2. 장바구니 항목 1건 삭제
 DELETE {{host}}/v1/cart-items/5711387611369472
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: {{accessToken}}

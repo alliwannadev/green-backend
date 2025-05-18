@@ -4,7 +4,7 @@ import alliwannadev.shop.common.dto.OkResponse;
 import alliwannadev.shop.common.security.CustomUser;
 import alliwannadev.shop.domain.order.controller.dto.CreateOrderRequestV1;
 import alliwannadev.shop.domain.order.controller.dto.CreateOrderResponseV1;
-import alliwannadev.shop.domain.order.service.OrderService;
+import alliwannadev.shop.domain.order.service.OrderManagementService;
 import alliwannadev.shop.domain.order.service.dto.CreateOrderResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderApiV1 {
 
-    private final OrderService orderService;
+    private final OrderManagementService orderManagementService;
 
     @PostMapping(OrderApiPaths.V1_ORDERS)
     public OkResponse<CreateOrderResponseV1> createOrder(
             @Valid @RequestBody CreateOrderRequestV1 createOrderRequestV1,
             @AuthenticationPrincipal CustomUser customUser
     ) {
-        CreateOrderResult createOrderResult = orderService.create(
+        CreateOrderResult createOrderResult = orderManagementService.createOrder(
                 createOrderRequestV1.toDto(customUser.getUserId())
         );
         return OkResponse.of(CreateOrderResponseV1.fromDto(createOrderResult));

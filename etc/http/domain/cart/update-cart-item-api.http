@@ -7,12 +7,15 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-> {% client.global.set("accessToken", response.body.data.accessToken); %}
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
 
 ### 2. 장바구니 항목 1건 변경
 PUT {{host}}0/v1/cart-items/6100402814586880
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+Authorization: {{accessToken}}
 
 {
   "productId": 6122529005506560,

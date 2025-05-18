@@ -1,4 +1,4 @@
-package alliwannadev.shop.domain.option.helper;
+package alliwannadev.shop.domain.option.support;
 
 import alliwannadev.shop.domain.option.model.ProductOption;
 import alliwannadev.shop.domain.option.repository.ProductOptionRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class TestProductOptionHelper {
+public class TestProductOptionDbUtil {
 
     private final ProductOptionRepository productOptionRepository;
 
@@ -27,5 +27,10 @@ public class TestProductOptionHelper {
                 .toList();
 
         productOptionRepository.saveAll(productOptions);
+    }
+
+    @Transactional
+    public void deleteAll() {
+        productOptionRepository.deleteAll();
     }
 }

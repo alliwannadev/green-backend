@@ -6,5 +6,6 @@ include(
     "supports:data-serializer",
     "supports:snowflake",
     "supports:event",
-    "supports:transactional-outbox"
+    "supports:transactional-outbox",
+    "supports:distributed-lock"
 )

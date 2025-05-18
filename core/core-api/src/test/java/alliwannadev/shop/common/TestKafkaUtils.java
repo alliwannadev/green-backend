@@ -35,9 +35,7 @@ public class TestKafkaUtils {
             short replicationFactor
     ) {
         // AdminClient 생성
-        Properties properties = new Properties();
-        properties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_CONTAINER.getBootstrapServers());
-        AdminClient adminClient = AdminClient.create(properties);
+        AdminClient adminClient = createAdminClient();
 
         // 토픽 속성 정의
         NewTopic newTopic = new NewTopic(topicName, numPartitions, replicationFactor);
@@ -48,6 +46,11 @@ public class TestKafkaUtils {
         } catch (Exception e) {
             log.error("[TestKafkaUtils.createTopic] {}", e.getMessage(), e);
         }
+    }
+
+    public static void deleteTopic(String... topicName) {
+        AdminClient adminClient = createAdminClient();
+        adminClient.deleteTopics(List.of(topicName));
     }
 
     public static KafkaConsumer<String, String> createConsumer(
@@ -121,5 +124,12 @@ public class TestKafkaUtils {
                     return null;
                 }).given(mockBeanOfOutboxEventPublisher)
                 .publish(any(EventType.class), any(), any());
+    }
+
+    private static AdminClient createAdminClient() {
+        Properties properties = new Properties();
+        properties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, KAFKA_CONTAINER.getBootstrapServers());
+        AdminClient adminClient = AdminClient.create(properties);
+        return adminClient;
     }
 }

@@ -5,13 +5,14 @@ import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.common.error.ErrorCode;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
-import alliwannadev.shop.domain.product.helper.TestProductHelper;
+import alliwannadev.shop.domain.product.support.TestProductDbUtil;
 import alliwannadev.shop.domain.product.model.Product;
 import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,11 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("통합 테스트 - 상품 API V1")
+@Transactional
 @IntegrationTest
 class ProductApiV1Test extends TestContainers {
 
     @Autowired MockMvc mockMvc;
-    @Autowired TestProductHelper testProductHelper;
+    @Autowired TestProductDbUtil testProductDbUtil;
 
     @DisplayName("[API][GET][SUCCESS] 상품 목록 조회 API 호출")
     @Test
@@ -76,7 +78,7 @@ class ProductApiV1Test extends TestContainers {
     void givenProductId_whenSearchProduct_thenReturnSuccessfulResult() throws Exception {
         // Given
         createProduct();
-        Product product = testProductHelper.getFirstProductId();
+        Product product = testProductDbUtil.getFirstProductId();
         Long productId = product.getProductId();
 
         // When & Then
@@ -135,6 +137,6 @@ class ProductApiV1Test extends TestContainers {
                         new CreateProductOptionCombinationParam("COLOR", "색상", "BLACK", "SIZE", "사이즈", "M", "", "", "", "", "", "", "", "", "", 10L, "COLOR-BLACK/SIZE-M")
                 )
         );
-        testProductHelper.createProduct(createProductParam);
+        testProductDbUtil.createProduct(createProductParam);
     }
 }

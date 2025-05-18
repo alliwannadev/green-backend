@@ -4,21 +4,23 @@ import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.common.error.BusinessException;
 import alliwannadev.shop.common.error.ErrorCode;
-import alliwannadev.shop.domain.auth.helper.TestAuthDbHelper;
-import alliwannadev.shop.domain.option.helper.TestProductOptionCombinationHelper;
+import alliwannadev.shop.domain.auth.support.TestAuthDbUtil;
 import alliwannadev.shop.domain.option.model.ProductOptionCombination;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.domain.option.support.TestProductOptionCombinationDbUtil;
 import alliwannadev.shop.domain.order.controller.dto.CreateOrderRequestV1;
-import alliwannadev.shop.domain.product.helper.TestProductHelper;
 import alliwannadev.shop.domain.product.model.Product;
 import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
+import alliwannadev.shop.domain.product.support.TestProductDbUtil;
+import alliwannadev.shop.domain.warehousing.support.TestProductWarehousingDbUtil;
 import alliwannadev.shop.supports.dataserializer.DataSerializer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,30 +31,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("통합 테스트 - 주문 API V1")
+@Transactional
 @IntegrationTest
 class OrderApiV1Test extends TestContainers {
 
     @Autowired MockMvc mockMvc;
-    @Autowired TestAuthDbHelper testAuthDbHelper;
-    @Autowired TestProductHelper testProductHelper;
-    @Autowired TestProductOptionCombinationHelper testProductOptionCombinationHelper;
+    @Autowired TestAuthDbUtil testAuthDbUtil;
+    @Autowired TestProductDbUtil testProductDbUtil;
+    @Autowired TestProductOptionCombinationDbUtil testProductOptionCombinationDbUtil;
+    @Autowired TestProductWarehousingDbUtil testProductWarehousingDbUtil;
 
     @DisplayName("[API][POST][SUCCESS] 주문 등록 API 호출")
     @Test
     void givenOrderParameters_whenCreateOrder_thenReturnSuccessfulResponse() throws Exception {
         // Given
-        testAuthDbHelper.createDefaultTestUserIfNotExists();
-        String accessToken = testAuthDbHelper.getDefaultToken();
+        testAuthDbUtil.createDefaultTestUserIfNotExists();
+        String accessToken = testAuthDbUtil.getDefaultToken();
         Product product = createProduct();
+        Long quantity = 2L;
         ProductOptionCombination productOptionCombination =
-                testProductOptionCombinationHelper
+                testProductOptionCombinationDbUtil
                         .getByCond(
                                 product.getProductId(),
                                 "색상_COLOR_BLACK/사이즈_SIZE_M"
                         )
                         .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_OPTION_COMBINATION_NOT_FOUND));
+        testProductWarehousingDbUtil.create(
+                productOptionCombination.getProductOptionCombinationId(),
+                "20250518",
+                quantity
+        );
 
-        Long quantity = 2L;
         List<CreateOrderRequestV1.OrderItem> requestOrderItemList =
                 List.of(getCreateOrderItem(product, productOptionCombination, quantity));
 
@@ -90,8 +99,8 @@ class OrderApiV1Test extends TestContainers {
     @Test
     void givenInvalidOrderParameters_whenCreateOrder_thenReturnFailedResponse() throws Exception {
         // Given
-        testAuthDbHelper.createDefaultTestUserIfNotExists();
-        String accessToken = testAuthDbHelper.getDefaultToken();
+        testAuthDbUtil.createDefaultTestUserIfNotExists();
+        String accessToken = testAuthDbUtil.getDefaultToken();
         CreateOrderRequestV1 createOrderRequestV1 =
                 new CreateOrderRequestV1(
                         "",
@@ -141,7 +150,7 @@ class OrderApiV1Test extends TestContainers {
                 )
         );
 
-        return testProductHelper.createProduct(createProductParam);
+        return testProductDbUtil.createProduct(createProductParam);
     }
 
     private CreateOrderRequestV1.OrderItem getCreateOrderItem(

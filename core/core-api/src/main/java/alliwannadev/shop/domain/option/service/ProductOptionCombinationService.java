@@ -4,6 +4,7 @@ import alliwannadev.shop.domain.option.model.ProductOptionCombination;
 import alliwannadev.shop.domain.option.repository.ProductOptionCombinationRepository;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
 import alliwannadev.shop.domain.product.model.Product;
+import alliwannadev.shop.domain.stock.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class ProductOptionCombinationService {
+
+    private final StockService stockService;
 
     private final ProductOptionCombinationRepository productOptionCombinationRepository;
 
@@ -28,6 +31,14 @@ public class ProductOptionCombinationService {
                 .toList();
 
         productOptionCombinationRepository.saveAll(optionCombinations);
+        for (ProductOptionCombination optionCombination : optionCombinations) {
+            stockService.create(optionCombination.getProductOptionCombinationId());
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<ProductOptionCombination> getByCombinationId(Long productCombinationId) {
+        return productOptionCombinationRepository.findById(productCombinationId);
     }
 
     @Transactional(readOnly = true)
