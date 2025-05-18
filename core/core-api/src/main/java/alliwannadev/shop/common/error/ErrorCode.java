@@ -34,6 +34,9 @@ public enum ErrorCode {
     CART_NOT_FOUND(404, "CART-001", "요청하신 장바구니 정보를 찾을 수 없습니다."),
     CART_ITEM_NOT_FOUND(404, "CART-002", "요청하신 장바구니 항목 정보를 찾을 수 없습니다."),
 
+    // Order
+    ORDER_NOT_FOUND(404, "ORDER-001", "요청하신 주문 정보를 찾을 수 없습니다."),
+
     // Stock
     STOCK_NOT_FOUND(404, "STOCK-001", "요청하신 재고 정보를 찾을 수 없습니다."),
     OUT_OF_STOCK(400, "STOCK-002", "해당 상품의 재고가 부족합니다.");

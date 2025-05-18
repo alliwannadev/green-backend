@@ -45,4 +45,16 @@ public class OrderService {
 
         return CreateOrderResult.fromEntity(savedOrder, savedOrderItemList);
     }
+
+    @Transactional(readOnly = true)
+    public Order getOneByOrderNo(String orderNo) {
+        return orderRepository
+                        .findByOrderNo(orderNo)
+                        .orElseThrow(() -> new BusinessException(ErrorCode.ORDER_NOT_FOUND));
+    }
+
+    @Transactional
+    public List<OrderItem> getOrderItemsById(Long orderId) {
+        return orderItemRepository.findAllByOrderId(orderId);
+    }
 }
