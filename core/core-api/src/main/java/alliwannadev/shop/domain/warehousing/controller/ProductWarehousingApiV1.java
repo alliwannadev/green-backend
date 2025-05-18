@@ -2,7 +2,7 @@ package alliwannadev.shop.domain.warehousing.controller;
 
 import alliwannadev.shop.common.dto.OkResponse;
 import alliwannadev.shop.domain.warehousing.controller.dto.CreateProductWarehousingRequestV1;
-import alliwannadev.shop.domain.warehousing.service.ProductWarehousingService;
+import alliwannadev.shop.domain.warehousing.service.ProductWarehousingManagementService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProductWarehousingApiV1 {
 
-    private final ProductWarehousingService productWarehousingService;
+    private final ProductWarehousingManagementService productWarehousingManagementService;
 
     @PostMapping(ProductWarehousingApiPaths.V1_WAREHOUSING)
     public OkResponse<Void> create(
             @Valid @RequestBody CreateProductWarehousingRequestV1 request
     ) {
-        productWarehousingService.create(request.toDto());
+        productWarehousingManagementService.createProductWarehousing(request.toDto());
         return OkResponse.of("상품 입고를 완료했습니다.");
     }
-
 }

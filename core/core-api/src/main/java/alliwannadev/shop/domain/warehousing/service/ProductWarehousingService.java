@@ -29,8 +29,10 @@ public class ProductWarehousingService {
         productOptionCombinationService
                 .getByCombinationId(param.productOptionCombinationId())
                 .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_OPTION_COMBINATION_NOT_FOUND));
-        Optional<Stock> findStock = stockService.getOneByCombinationId(param.productOptionCombinationId());
-        Stock foundStock = findStock.orElseGet(() -> stockService.create(param.productOptionCombinationId()));
+        Stock foundStock =
+                stockService
+                        .getOneByCombinationId(param.productOptionCombinationId())
+                        .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
 
         productWarehousingRepository.save(
                 ProductWarehousing.of(
