@@ -1,0 +1,23 @@
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
+
+### 2. 회원 목록 조회 API 호출 [Case 1]
+GET {{host}}/v1/users?size=100&page=35000
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+### 3. 회원 목록 조회 API 호출 [Case 2]
+#GET {{host}}/v1/users?size=100&page=100000&keyword=sample
+#Content-Type: application/json
+#Authorization: {{accessToken}}
