@@ -3,9 +3,13 @@ package alliwannadev.shop.domain.user.service;
 import alliwannadev.shop.common.error.BusinessException;
 import alliwannadev.shop.common.error.ErrorCode;
 import alliwannadev.shop.domain.user.domain.User;
+import alliwannadev.shop.domain.user.repository.UserQueryRepository;
 import alliwannadev.shop.domain.user.repository.UserRepository;
+import alliwannadev.shop.domain.user.service.dto.GetUserResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +21,14 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserQueryRepository userQueryRepository;
+
+    @Transactional(readOnly = true)
+    public Page<GetUserResult> getAll(String keyword, Pageable pageable) {
+        return userQueryRepository
+                .findAll(keyword, pageable)
+                .map(GetUserResult::from);
+    }
 
     @Transactional(readOnly = true)
     public Optional<User> getOneByEmail(String email) {
