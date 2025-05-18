@@ -1,7 +1,7 @@
-package alliwannadev.shop.domain.product.helper;
+package alliwannadev.shop.domain.product.support;
 
-import alliwannadev.shop.domain.option.helper.TestProductOptionCombinationHelper;
-import alliwannadev.shop.domain.option.helper.TestProductOptionHelper;
+import alliwannadev.shop.domain.option.support.TestProductOptionCombinationDbUtil;
+import alliwannadev.shop.domain.option.support.TestProductOptionDbUtil;
 import alliwannadev.shop.domain.product.model.Product;
 import alliwannadev.shop.domain.product.repository.ProductRepository;
 import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Component
-public class TestProductHelper {
+public class TestProductDbUtil {
 
     private final ProductRepository productRepository;
 
-    private final TestProductOptionHelper testProductOptionHelper;
-    private final TestProductOptionCombinationHelper testProductOptionCombinationHelper;
+    private final TestProductOptionDbUtil testProductOptionDbUtil;
+    private final TestProductOptionCombinationDbUtil testProductOptionCombinationDbUtil;
 
     @Transactional
     public Product createProduct(CreateProductParam createProductParam) {
@@ -34,17 +34,22 @@ public class TestProductHelper {
                 )
         );
 
-        testProductOptionHelper.createAll(
+        testProductOptionDbUtil.createAll(
                 product,
                 createProductParam.options()
         );
 
-        testProductOptionCombinationHelper.createAll(
+        testProductOptionCombinationDbUtil.createAll(
                 product,
                 createProductParam.optionCombinations()
         );
 
         return product;
+    }
+
+    @Transactional
+    public void deleteAll() {
+        productRepository.deleteAll();
     }
 
     @Transactional(readOnly = true)

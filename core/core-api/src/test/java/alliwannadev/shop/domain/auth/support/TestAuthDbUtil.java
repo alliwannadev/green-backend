@@ -1,18 +1,18 @@
-package alliwannadev.shop.domain.auth.helper;
+package alliwannadev.shop.domain.auth.support;
 
 import alliwannadev.shop.common.dto.TokenInfo;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.auth.service.AuthService;
 import alliwannadev.shop.domain.user.domain.User;
-import alliwannadev.shop.domain.user.helper.TestUserRepository;
+import alliwannadev.shop.domain.user.support.TestUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Component
-public class TestAuthDbHelper {
+public class TestAuthDbUtil {
 
     private static final String DEFAULT_TEST_USER_EMAIL = "defaultuser@test.com";
     private static final String DEFAULT_TEST_USER_PASSWORD = "12345678";

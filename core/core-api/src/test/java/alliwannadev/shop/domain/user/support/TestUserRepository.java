@@ -1,4 +1,4 @@
-package alliwannadev.shop.domain.user.helper;
+package alliwannadev.shop.domain.user.support;
 
 import alliwannadev.shop.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

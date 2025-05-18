@@ -1,7 +1,8 @@
-package alliwannadev.shop.domain.option.helper;
+package alliwannadev.shop.domain.option.support;
 
 import alliwannadev.shop.domain.option.model.ProductOptionCombination;
 import alliwannadev.shop.domain.option.repository.ProductOptionCombinationRepository;
+import alliwannadev.shop.domain.option.service.ProductOptionCombinationService;
 import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
 import alliwannadev.shop.domain.product.model.Product;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,9 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class TestProductOptionCombinationHelper {
+public class TestProductOptionCombinationDbUtil {
 
+    private final ProductOptionCombinationService productOptionCombinationService;
     private final ProductOptionCombinationRepository productOptionCombinationRepository;
 
     @Transactional
@@ -22,19 +24,19 @@ public class TestProductOptionCombinationHelper {
             Product product,
             List<CreateProductOptionCombinationParam> combinationParams
     ) {
-        List<ProductOptionCombination> optionCombinations = combinationParams
-                .stream()
-                .map(combinationParam -> combinationParam.toEntity(product))
-                .toList();
-
-        productOptionCombinationRepository.saveAll(optionCombinations);
+        productOptionCombinationService.createAll(product, combinationParams);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Optional<ProductOptionCombination> getByCond(
             Long productId,
             String selectedOptions
     ) {
         return productOptionCombinationRepository.findByCond(productId, selectedOptions);
+    }
+
+    @Transactional
+    public void deleteAll() {
+        productOptionCombinationRepository.deleteAll();
     }
 }
