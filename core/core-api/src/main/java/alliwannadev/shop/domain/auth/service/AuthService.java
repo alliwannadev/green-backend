@@ -4,6 +4,7 @@ import alliwannadev.shop.common.dto.TokenInfo;
 import alliwannadev.shop.common.error.BusinessException;
 import alliwannadev.shop.common.error.ErrorCode;
 import alliwannadev.shop.common.security.JwtService;
+import alliwannadev.shop.common.security.TokenType;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.user.domain.User;
@@ -66,5 +67,9 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return jwtService.createTokenInfo(authentication);
+    }
+
+    public String getEmailFromToken(TokenInfo tokenInfo) {
+        return jwtService.getEmail(tokenInfo.accessToken(), TokenType.ACCESS_TOKEN);
     }
 }
