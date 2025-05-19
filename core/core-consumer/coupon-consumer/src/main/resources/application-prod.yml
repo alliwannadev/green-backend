@@ -1,0 +1,38 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${PROD_RDB_URL}
+    username: ${PROD_RDB_USERNAME}
+    password: ${PROD_RDB_PASSWORD}
+
+  jpa:
+    hibernate.ddl-auto: none
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate.default_batch_fetch_size: 100
+
+  data:
+    redis:
+      host: ${PROD_REDIS_HOST}
+      port: ${PROD_REDIS_PORT}
+      repositories:
+        enabled: false
+
+  kafka:
+    bootstrap-servers: ${PROD_KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      group-id: coupon-consumer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+
+jwt:
+  access_secret: ${PROD_ACCESS_SECRET}
+
+app:
+  node-id: ${PROD_NODE_ID}
