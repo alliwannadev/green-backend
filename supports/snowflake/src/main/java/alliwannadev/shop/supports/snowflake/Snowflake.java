@@ -4,88 +4,65 @@ import java.time.Instant;
 
 public class Snowflake {
 
-	private static final int UNUSED_BITS = 1;
-	private static final int TIMESTAMP_BITS = 41;
-	private static final int DATACENTER_ID_BITS = 5;
-	private static final int WORKER_ID_BITS = 5;
-	private static final int SEQUENCE_BITS = 12;
+    private static final int UNUSED_BITS = 1; // Sign bit, Unused (always set to 0)
+    private static final int TIMESTAMP_BITS = 41;
+    private static final int NODE_ID_BITS = 10;
+    private static final int SEQUENCE_BITS = 12;
 
-	private static final long MAX_DATA_CENTER_ID = (1L << DATACENTER_ID_BITS) - 1;
-	private static final long MAX_WORKER_ID = (1L << WORKER_ID_BITS) - 1;
-	private static final long MAX_SEQUENCE = (1L << SEQUENCE_BITS) - 1;
+    private static final long MAX_NODE_ID = (1L << NODE_ID_BITS) - 1;
+    private static final long MAX_SEQUENCE = (1L << SEQUENCE_BITS) - 1;
 
-	private static final long WORKER_ID_SHIFT = SEQUENCE_BITS;
-	private static final long DATA_CENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
-	private static final long TIMESTAMP_LEFT_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATACENTER_ID_BITS;
+    // Custom Epoch (2025-04-30T09:41:51.570716Z)
+    private static final long DEFAULT_CUSTOM_EPOCH = 1746006111570L;
 
-	// Custom Epoch (2025-04-30T09:41:51.570716Z)
-	private static final long DEFAULT_CUSTOM_EPOCH = 1746006111570L;
+    private final long nodeId;
 
-	private final long dataCenterId;
-	private final long nodeId;
-	private final long customEpoch;
+    private volatile long sequence = 0L;
+    private volatile long lastTimestamp = -1L;
 
-	private volatile long sequence = 0L;
-	private volatile long lastTimestamp = -1L;
+    public Snowflake(long nodeId) {
+        if (nodeId < 0 || nodeId > MAX_NODE_ID) {
+            System.out.println("nodeId = " + nodeId);
+            throw new IllegalArgumentException(String.format("nodeId must be between %d and %d", 0, MAX_NODE_ID));
+        }
 
-	public Snowflake(
-			long dataCenterId,
-			long nodeId,
-			long customEpoch
-	) {
-		if (dataCenterId > MAX_DATA_CENTER_ID || dataCenterId < 0) {
-			throw new IllegalArgumentException(String.format("datacenterId must be between %d and %d", 0, MAX_DATA_CENTER_ID));
-		}
-		if (nodeId > MAX_WORKER_ID || nodeId < 0) {
-			throw new IllegalArgumentException(String.format("workerId must be between %d and %d", 0, MAX_WORKER_ID));
-		}
+        this.nodeId = nodeId;
+    }
 
-		this.dataCenterId = dataCenterId;
-		this.nodeId = nodeId;
-		this.customEpoch = customEpoch;
-	}
+    public synchronized long nextId() {
+        long currentTimestamp = getTimestamp();
 
-	public Snowflake(
-			long dataCenterId,
-			long nodeId
-	) {
-		this(dataCenterId, nodeId, DEFAULT_CUSTOM_EPOCH);
-	}
+        if (currentTimestamp < lastTimestamp) {
+            throw new IllegalStateException("Clock is Moving Backwards!");
+        }
 
-	public synchronized long nextId() {
-		long currentTimestamp = getTimestamp();
+        if (currentTimestamp == lastTimestamp) {
+            sequence = (sequence + 1) & MAX_SEQUENCE;
+            if (sequence == 0) {
+                currentTimestamp = waitNextMillis(currentTimestamp);
+            }
+        } else {
+            sequence = 0;
+        }
 
-		if (currentTimestamp < lastTimestamp) {
-			throw new IllegalStateException("Clock is Moving Backwards!");
-		}
+        lastTimestamp = currentTimestamp;
 
-		if (currentTimestamp == lastTimestamp) {
-			sequence = (sequence + 1) & MAX_SEQUENCE;
-			if (sequence == 0) {
-				currentTimestamp = waitNextMillis(currentTimestamp);
-			}
-		} else {
-			sequence = 0;
-		}
+        long id = currentTimestamp << (NODE_ID_BITS + SEQUENCE_BITS)
+                | (nodeId << SEQUENCE_BITS)
+                | sequence;
 
-		lastTimestamp = currentTimestamp;
+        return id;
+    }
 
-		long id = ((currentTimestamp - customEpoch) << TIMESTAMP_LEFT_SHIFT)
-				| (dataCenterId << DATA_CENTER_ID_SHIFT)
-				| (nodeId << WORKER_ID_SHIFT)
-				| sequence;
+    private long getTimestamp() {
+        return Instant.now().toEpochMilli() - DEFAULT_CUSTOM_EPOCH;
+    }
 
-		return id;
-	}
+    private long waitNextMillis(long currentTimestamp) {
+        while (currentTimestamp == lastTimestamp) {
+            currentTimestamp = getTimestamp();
+        }
 
-	private long getTimestamp() {
-		return Instant.now().toEpochMilli();
-	}
-
-	private long waitNextMillis(long currentTimestamp) {
-		while (currentTimestamp == lastTimestamp) {
-			currentTimestamp = getTimestamp();
-		}
-		return currentTimestamp;
-	}
+        return currentTimestamp;
+    }
 }

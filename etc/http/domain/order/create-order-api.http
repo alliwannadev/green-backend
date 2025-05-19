@@ -1,0 +1,42 @@
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
+
+### 2. 주문 등록 API 호출
+POST {{host}}/v1/orders
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+  "receiverName": "테스터",
+  "receiverPhoneNumber": "01011112222",
+  "receiverAddr": "서울특별시 OO구 OO동 000-00",
+  "receiverPostalCode": "11111",
+  "totalQuantity": 1,
+  "totalAmount": 100,
+  "totalDiscountedAmount": 0,
+  "totalPaymentAmount": 100,
+  "orderItemList": [
+    {
+      "productId": 6247379514691584,
+      "productOptionCombinationId": 6247379539857408,
+      "price": 100,
+      "discountedPrice": 0,
+      "paymentPrice": 100,
+      "quantity": 1,
+      "amount": 100,
+      "discountedAmount": 0,
+      "paymentAmount": 100
+    }
+  ]
+}

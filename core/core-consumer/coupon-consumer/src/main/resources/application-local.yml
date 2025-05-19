@@ -1,0 +1,38 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/green
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate.ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate.default_batch_fetch_size: 100
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      repositories:
+        enabled: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: coupon-consumer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+
+jwt:
+  access_secret: 256ff6d883fa12e4e426ee47d1eed5928bf4e03c8511ed7286804df5718b906d173b375d8b6521e4afddd0c540de311b8fe5ee73352f31a82eeb92c792bdcf66
+
+app:
+  node-id: 2

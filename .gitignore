@@ -9,7 +9,7 @@
 **/src/main/generated
 
 # Docker
-docker/local/redis/data
+etc/docker/local/redis/data
 
 # User-specific stuff
 .idea/**/workspace.xml

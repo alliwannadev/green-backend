@@ -1,0 +1,24 @@
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
+
+### 2. 입고 처리
+POST {{host}}/v1/warehousing
+Content-Type: application/json
+Authorization: {{accessToken}}
+
+{
+  "productOptionCombinationId": 6247379539857408,
+  "warehousingDate": "20250518",
+  "quantity": 5
+}

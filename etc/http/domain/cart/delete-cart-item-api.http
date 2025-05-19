@@ -1,0 +1,18 @@
+### 1. 로그인 API 호출
+POST {{host}}/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "tester@test.com",
+  "password": "12345678"
+}
+
+> {%
+    const token = response.body.data.grantType + ' ' + response.body.data.accessToken;
+    client.global.set("accessToken", token);
+%}
+
+### 2. 장바구니 항목 1건 삭제
+DELETE {{host}}/v1/cart-items/5711387611369472
+Content-Type: application/json
+Authorization: {{accessToken}}
