@@ -1,5 +1,6 @@
 package alliwannadev.shop.domain.user.service;
 
+import alliwannadev.shop.common.constant.UserSearchType;
 import alliwannadev.shop.common.error.BusinessException;
 import alliwannadev.shop.common.error.ErrorCode;
 import alliwannadev.shop.domain.user.domain.User;
@@ -24,9 +25,17 @@ public class UserService {
     private final UserQueryRepository userQueryRepository;
 
     @Transactional(readOnly = true)
-    public Page<GetUserResult> getAll(String keyword, Pageable pageable) {
+    public Page<GetUserResult> getAll(
+            UserSearchType searchType,
+            String keyword,
+            Pageable pageable
+    ) {
         return userQueryRepository
-                .findAll(keyword, pageable)
+                .findAll(
+                        searchType,
+                        keyword,
+                        pageable
+                )
                 .map(GetUserResult::from);
     }
 

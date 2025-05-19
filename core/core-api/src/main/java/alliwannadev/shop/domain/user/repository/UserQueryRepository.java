@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.user.repository;
 
-import alliwannadev.shop.common.util.QuerydslUtil;
+import alliwannadev.shop.common.constant.UserSearchType;
 import alliwannadev.shop.domain.user.repository.dto.GetUserDto;
 import alliwannadev.shop.domain.user.repository.dto.QGetUserDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -26,9 +27,27 @@ public class UserQueryRepository {
 
     @Transactional(readOnly = true)
     public Page<GetUserDto> findAll(
+            UserSearchType searchType,
             String keyword,
             Pageable pageable
     ) {
+        List<Long> userIds =
+                primaryQueryFactory
+                        .select(user.userId)
+                        .from(user)
+                        .where(
+                                emailStartsWith(searchType, keyword),
+                                phoneStartsWith(searchType, keyword)
+                        )
+                        .orderBy(user.userId.desc())
+                        .offset(pageable.getOffset())
+                        .limit(pageable.getPageSize())
+                        .fetch();
+
+        if (CollectionUtils.isEmpty(userIds)) {
+            return Page.empty(pageable);
+        }
+
         List<GetUserDto> content =
                 primaryQueryFactory
                         .select(
@@ -43,15 +62,8 @@ public class UserQueryRepository {
                                 )
                         )
                         .from(user)
-                        .where(
-                                QuerydslUtil.orConditions(
-                                        emailStartsWith(keyword),
-                                        phoneStartsWith(keyword)
-                                )
-                        )
+                        .where(user.userId.in(userIds))
                         .orderBy(user.userId.desc())
-                        .offset(pageable.getOffset())
-                        .limit(pageable.getPageSize())
                         .fetch();
 
         Long totalCount =
@@ -59,10 +71,8 @@ public class UserQueryRepository {
                         .select(user.userId.countDistinct())
                         .from(user)
                         .where(
-                                QuerydslUtil.orConditions(
-                                        emailStartsWith(keyword),
-                                        phoneStartsWith(keyword)
-                                )
+                                emailStartsWith(searchType, keyword),
+                                phoneStartsWith(searchType, keyword)
                         )
                         .fetchOne();
 
@@ -73,11 +83,25 @@ public class UserQueryRepository {
         );
     }
 
-    private BooleanExpression emailStartsWith(String keyword) {
-        return StringUtils.isBlank(keyword) ? null : user.email.startsWith(keyword);
+    private BooleanExpression emailStartsWith(
+            UserSearchType searchType,
+            String keyword
+    ) {
+        if (searchType == null || StringUtils.isBlank(keyword)) {
+            return null;
+        }
+
+        return searchType != UserSearchType.EMAIL ? null : user.email.startsWith(keyword);
     }
 
-    private BooleanExpression phoneStartsWith(String keyword) {
-        return StringUtils.isBlank(keyword) ? null : user.phone.startsWith(keyword);
+    private BooleanExpression phoneStartsWith(
+            UserSearchType searchType,
+            String keyword
+    ) {
+        if (searchType == null || StringUtils.isBlank(keyword)) {
+            return null;
+        }
+
+        return searchType != UserSearchType.PHONE ? null : user.email.startsWith(keyword);
     }
 }
