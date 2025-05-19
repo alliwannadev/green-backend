@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 @ComponentScan("alliwannadev.shop.core.domain")
 @Configuration
-public class DomainConfig {
+public class CoreDomainConfig {
 
 }
