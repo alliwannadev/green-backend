@@ -35,4 +35,4 @@ jwt:
   access_secret: 256ff6d883fa12e4e426ee47d1eed5928bf4e03c8511ed7286804df5718b906d173b375d8b6521e4afddd0c540de311b8fe5ee73352f31a82eeb92c792bdcf66
 
 app:
-  node-id: 1
+  node-id: 2
