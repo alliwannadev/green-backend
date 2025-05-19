@@ -6,6 +6,7 @@ import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.response.TokenResponseV1;
 import alliwannadev.shop.domain.auth.service.AuthService;
+import alliwannadev.shop.domain.user.service.UserCacheService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthApiV1 {
 
     private final AuthService authService;
+    private final UserCacheService userCacheService;
 
     @PostMapping(AuthApiPaths.V1_SIGN_UP)
     public OkResponse<Void> signUp(
@@ -35,6 +37,8 @@ public class AuthApiV1 {
             @Valid @RequestBody SignInRequestV1 signInRequestV1
     ) {
         TokenInfo tokenInfo = authService.signIn(signInRequestV1);
+        userCacheService.create(authService.getEmailFromToken(tokenInfo));
+
         return OkResponse.of(
                 TokenResponseV1.of(
                         tokenInfo.grantType(),

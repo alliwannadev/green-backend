@@ -28,6 +28,13 @@ public class JwtService {
         return new TokenInfo(GRANT_TYPE, accessToken);
     }
 
+    public String getEmail(
+            String token,
+            TokenType tokenType
+    ) {
+        return jwtTokenProvider.getEmail(token, tokenType);
+    }
+
     private String generateAccessToken(CustomUser customUser) {
         long now = (new Date()).getTime();
         Date tokenExpiration = new Date(now + ACCESS_TOKEN_EXPIRATION_MILLISECONDS);

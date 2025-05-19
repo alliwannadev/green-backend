@@ -67,6 +67,11 @@ public class JwtTokenProvider {
         return getClaims(token, secret);
     }
 
+    public Long getUserId(String token, TokenType tokenType) {
+        Claims claims = parseToken(token, tokenType);
+        return claims.get(USER_ID_KEY, Long.class);
+    }
+
     public String getEmail(String token, TokenType tokenType) {
         Claims claims = parseToken(token, tokenType);
         return claims.getSubject();

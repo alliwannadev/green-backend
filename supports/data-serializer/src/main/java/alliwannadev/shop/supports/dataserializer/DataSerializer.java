@@ -1,6 +1,5 @@
 package alliwannadev.shop.supports.dataserializer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,20 +22,25 @@ public final class DataSerializer {
     public static <T> T deserialize(String data, Class<T> clazz) {
         try {
             return objectMapper.readValue(data, clazz);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("[DataSerializer.deserialize] data={}, clazz={}", data, clazz, e);
             return null;
         }
     }
 
     public static <T> T deserialize(Object data, Class<T> clazz) {
-        return objectMapper.convertValue(data, clazz);
+        try {
+            return objectMapper.convertValue(data, clazz);
+        } catch (Exception e) {
+            log.error("[DataSerializer.deserialize] data={}, clazz={}", data, clazz, e);
+            return null;
+        }
     }
 
     public static String serialize(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             log.error("[DataSerializer.serialize] object={}", object, e);
             return null;
         }
