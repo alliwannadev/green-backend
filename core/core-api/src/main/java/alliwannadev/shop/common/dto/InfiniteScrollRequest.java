@@ -1,5 +1,6 @@
 package alliwannadev.shop.common.dto;
 
+import alliwannadev.shop.core.domain.common.dto.InfiniteScrollCond;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 

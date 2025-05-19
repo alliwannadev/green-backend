@@ -1,12 +1,12 @@
 package alliwannadev.shop.domain.auth.controller;
 
 import alliwannadev.shop.common.dto.OkResponse;
-import alliwannadev.shop.common.dto.TokenInfo;
+import alliwannadev.shop.core.domain.common.dto.TokenInfo;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.response.TokenResponseV1;
-import alliwannadev.shop.domain.auth.service.AuthService;
-import alliwannadev.shop.domain.user.service.UserCacheService;
+import alliwannadev.shop.core.domain.modules.auth.AuthService;
+import alliwannadev.shop.core.domain.modules.user.service.UserCacheService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class AuthApiV1 {
     public OkResponse<Void> signUp(
             @Valid @RequestBody SignUpRequestV1 signUpRequestV1
     ) {
-        authService.signUp(signUpRequestV1);
+        authService.signUp(signUpRequestV1.toDto());
         return OkResponse.of("회원가입을 완료했습니다.");
     }
 
@@ -36,7 +36,7 @@ public class AuthApiV1 {
     public OkResponse<TokenResponseV1> signIn(
             @Valid @RequestBody SignInRequestV1 signInRequestV1
     ) {
-        TokenInfo tokenInfo = authService.signIn(signInRequestV1);
+        TokenInfo tokenInfo = authService.signIn(signInRequestV1.toDto());
         userCacheService.create(authService.getEmailFromToken(tokenInfo));
 
         return OkResponse.of(

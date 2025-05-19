@@ -1,8 +1,8 @@
 package alliwannadev.shop.domain.product.controller.dto;
 
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
-import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

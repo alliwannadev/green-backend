@@ -1,7 +1,7 @@
 package alliwannadev.shop.domain.stock.support;
 
-import alliwannadev.shop.domain.stock.model.Stock;
-import alliwannadev.shop.domain.stock.repository.StockRepository;
+import alliwannadev.shop.core.domain.modules.stock.model.Stock;
+import alliwannadev.shop.core.domain.modules.stock.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

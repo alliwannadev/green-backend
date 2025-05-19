@@ -1,10 +1,10 @@
 package alliwannadev.shop.domain.option.support;
 
-import alliwannadev.shop.domain.option.model.ProductOptionCombination;
-import alliwannadev.shop.domain.option.repository.ProductOptionCombinationRepository;
-import alliwannadev.shop.domain.option.service.ProductOptionCombinationService;
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.domain.product.model.Product;
+import alliwannadev.shop.core.domain.modules.option.model.ProductOptionCombination;
+import alliwannadev.shop.core.domain.modules.option.repository.ProductOptionCombinationRepository;
+import alliwannadev.shop.core.domain.modules.option.service.ProductOptionCombinationService;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.domain.modules.product.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

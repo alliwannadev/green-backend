@@ -3,7 +3,7 @@ package alliwannadev.shop.domain.auth.controller;
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.common.TestKafkaUtils;
-import alliwannadev.shop.common.error.ErrorCode;
+import alliwannadev.shop.core.domain.common.error.ErrorCode;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.domain.auth.support.TestAuthDbUtil;

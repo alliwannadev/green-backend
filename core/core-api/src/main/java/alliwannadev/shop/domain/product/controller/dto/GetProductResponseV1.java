@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.product.controller.dto;
 
-import alliwannadev.shop.domain.product.service.dto.GetProductResult;
+import alliwannadev.shop.core.domain.modules.product.service.dto.GetProductResult;
 
 public record GetProductResponseV1(
         Long productId,

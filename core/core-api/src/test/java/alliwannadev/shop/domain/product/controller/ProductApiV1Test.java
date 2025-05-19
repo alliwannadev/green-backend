@@ -2,12 +2,12 @@ package alliwannadev.shop.domain.product.controller;
 
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.common.error.ErrorCode;
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.domain.common.error.ErrorCode;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.domain.product.support.TestProductDbUtil;
-import alliwannadev.shop.domain.product.model.Product;
-import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.domain.modules.product.model.Product;
+import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

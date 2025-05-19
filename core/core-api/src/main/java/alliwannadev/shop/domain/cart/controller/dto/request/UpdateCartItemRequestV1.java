@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.cart.controller.dto.request;
 
-import alliwannadev.shop.domain.cart.service.dto.UpdateCartItemParam;
+import alliwannadev.shop.core.domain.modules.cart.service.dto.UpdateCartItemParam;
 
 public record UpdateCartItemRequestV1(
         Long productId,

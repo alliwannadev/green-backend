@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.user.support;
 
-import alliwannadev.shop.domain.user.domain.User;
+import alliwannadev.shop.core.domain.modules.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -2,9 +2,9 @@ package alliwannadev.shop.domain.product.support;
 
 import alliwannadev.shop.domain.option.support.TestProductOptionCombinationDbUtil;
 import alliwannadev.shop.domain.option.support.TestProductOptionDbUtil;
-import alliwannadev.shop.domain.product.model.Product;
-import alliwannadev.shop.domain.product.repository.ProductRepository;
-import alliwannadev.shop.domain.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.domain.modules.product.model.Product;
+import alliwannadev.shop.core.domain.modules.product.repository.ProductRepository;
+import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

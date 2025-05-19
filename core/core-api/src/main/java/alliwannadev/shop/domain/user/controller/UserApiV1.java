@@ -1,15 +1,15 @@
 package alliwannadev.shop.domain.user.controller;
 
-import alliwannadev.shop.common.constant.UserSearchType;
+import alliwannadev.shop.core.domain.common.constant.UserSearchType;
 import alliwannadev.shop.common.dto.OkResponse;
 import alliwannadev.shop.common.dto.PaginationRequest;
 import alliwannadev.shop.common.dto.PaginationResponse;
-import alliwannadev.shop.common.security.CustomUser;
+import alliwannadev.shop.core.domain.modules.auth.CustomUser;
 import alliwannadev.shop.domain.user.controller.dto.response.GetUserListRequestV1;
 import alliwannadev.shop.domain.user.controller.dto.response.GetUserResponseV1;
 import alliwannadev.shop.domain.user.controller.dto.response.GetUsersMeResponseV1;
-import alliwannadev.shop.domain.user.domain.User;
-import alliwannadev.shop.domain.user.service.UserService;
+import alliwannadev.shop.core.domain.modules.user.domain.User;
+import alliwannadev.shop.core.domain.modules.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

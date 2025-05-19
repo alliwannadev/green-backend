@@ -1,9 +1,9 @@
 package alliwannadev.shop.domain.option.support;
 
-import alliwannadev.shop.domain.option.model.ProductOption;
-import alliwannadev.shop.domain.option.repository.ProductOptionRepository;
-import alliwannadev.shop.domain.option.service.dto.CreateProductOptionParam;
-import alliwannadev.shop.domain.product.model.Product;
+import alliwannadev.shop.core.domain.modules.option.model.ProductOption;
+import alliwannadev.shop.core.domain.modules.option.repository.ProductOptionRepository;
+import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.domain.modules.product.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

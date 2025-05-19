@@ -1,7 +1,7 @@
 package alliwannadev.shop.domain.order.controller.dto;
 
-import alliwannadev.shop.common.constant.OrderStatus;
-import alliwannadev.shop.domain.order.service.dto.CreateOrderResult;
+import alliwannadev.shop.core.domain.common.constant.OrderStatus;
+import alliwannadev.shop.core.domain.modules.order.service.dto.CreateOrderResult;
 
 import java.util.List;
 

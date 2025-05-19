@@ -1,10 +1,10 @@
 package alliwannadev.shop.domain.auth.support;
 
-import alliwannadev.shop.common.dto.TokenInfo;
+import alliwannadev.shop.core.domain.common.dto.TokenInfo;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.domain.auth.controller.dto.request.SignUpRequestV1;
-import alliwannadev.shop.domain.auth.service.AuthService;
-import alliwannadev.shop.domain.user.domain.User;
+import alliwannadev.shop.core.domain.modules.auth.AuthService;
+import alliwannadev.shop.core.domain.modules.user.domain.User;
 import alliwannadev.shop.domain.user.support.TestUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,12 +22,12 @@ public class TestAuthDbUtil {
 
     @Transactional
     public void signUp(SignUpRequestV1 signUpRequestV1) {
-        authService.signUp(signUpRequestV1);
+        authService.signUp(signUpRequestV1.toDto());
     }
 
     @Transactional(readOnly = true)
     public TokenInfo signIn(SignInRequestV1 signInRequestV1) {
-        return authService.signIn(signInRequestV1);
+        return authService.signIn(signInRequestV1.toDto());
     }
 
     @Transactional

@@ -1,12 +1,12 @@
 package alliwannadev.shop.domain.cart.controller;
 
 import alliwannadev.shop.common.dto.OkResponse;
-import alliwannadev.shop.common.security.CustomUser;
+import alliwannadev.shop.core.domain.modules.auth.CustomUser;
 import alliwannadev.shop.domain.cart.controller.dto.request.CreateCartItemRequestV1;
 import alliwannadev.shop.domain.cart.controller.dto.request.UpdateCartItemRequestV1;
 import alliwannadev.shop.domain.cart.controller.dto.response.GetCartItemListResponseV1;
-import alliwannadev.shop.domain.cart.service.CartManagementService;
-import alliwannadev.shop.domain.cart.service.dto.GetCartItemListResult;
+import alliwannadev.shop.core.domain.modules.cart.service.CartManagementService;
+import alliwannadev.shop.core.domain.modules.cart.service.dto.GetCartItemListResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

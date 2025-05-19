@@ -3,7 +3,7 @@ package alliwannadev.shop.common.config;
 import alliwannadev.shop.common.security.JwtAccessDeniedHandler;
 import alliwannadev.shop.common.security.JwtAuthenticationEntryPoint;
 import alliwannadev.shop.common.security.JwtAuthenticationFilter;
-import alliwannadev.shop.common.security.JwtTokenProvider;
+import alliwannadev.shop.core.domain.modules.auth.JwtTokenProvider;
 import alliwannadev.shop.domain.product.controller.ProductApiPaths;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;

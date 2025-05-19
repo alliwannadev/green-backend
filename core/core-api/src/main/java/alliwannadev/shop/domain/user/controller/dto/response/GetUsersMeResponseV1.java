@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.user.controller.dto.response;
 
-import alliwannadev.shop.domain.user.domain.User;
+import alliwannadev.shop.core.domain.modules.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

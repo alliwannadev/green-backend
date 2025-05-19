@@ -1,14 +1,11 @@
 package alliwannadev.shop.domain.auth.controller.dto.request;
 
-import alliwannadev.shop.common.security.Role;
-import alliwannadev.shop.domain.user.domain.User;
+import alliwannadev.shop.core.domain.modules.auth.dto.SignUpParam;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -39,14 +36,12 @@ public class SignUpRequestV1 {
         this.phone = phone;
     }
 
-    public User toUserEntity() {
-        return User.of(
+    public SignUpParam toDto() {
+        return new SignUpParam(
                 email,
                 password,
                 name,
-                phone,
-                "",
-                Set.of(Role.USER)
+                phone
         );
     }
 }

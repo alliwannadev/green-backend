@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.product.controller.dto;
 
-import alliwannadev.shop.domain.product.service.dto.GetProductListParam;
+import alliwannadev.shop.core.domain.modules.product.service.dto.GetProductListParam;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.List;

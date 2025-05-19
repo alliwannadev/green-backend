@@ -1,6 +1,6 @@
 package alliwannadev.shop.domain.cart.controller.dto.request;
 
-import alliwannadev.shop.domain.cart.service.dto.CreateCartItemParam;
+import alliwannadev.shop.core.domain.modules.cart.service.dto.CreateCartItemParam;
 
 public record CreateCartItemRequestV1(
         Long productId,
