@@ -1,7 +1,7 @@
 package alliwannadev.shop.coupon.eventhandler;
 
-import alliwannadev.shop.coupon.service.CouponService;
-import alliwannadev.shop.coupon.service.dto.IssueCouponParam;
+import alliwannadev.shop.core.domain.modules.coupon.service.CouponService;
+import alliwannadev.shop.core.domain.modules.coupon.service.dto.IssueCouponParam;
 import alliwannadev.shop.supports.event.Event;
 import alliwannadev.shop.supports.event.EventPayload;
 import alliwannadev.shop.supports.event.EventType;

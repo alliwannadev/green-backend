@@ -1,6 +1,6 @@
 package alliwannadev.shop.common.security;
 
-import alliwannadev.shop.common.error.ErrorCode;
+import alliwannadev.shop.core.domain.common.error.ErrorCode;
 import alliwannadev.shop.common.error.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,5 +1,7 @@
 package alliwannadev.shop.common.error;
 
+import alliwannadev.shop.core.domain.common.error.BusinessException;
+import alliwannadev.shop.core.domain.common.error.ErrorCode;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
