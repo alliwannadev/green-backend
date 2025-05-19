@@ -1,11 +1,11 @@
-package alliwannadev.shop.coupon.service;
+package alliwannadev.shop.core.domain.modules.coupon.service;
 
-import alliwannadev.shop.coupon.constant.CouponStatus;
-import alliwannadev.shop.coupon.model.Coupon;
-import alliwannadev.shop.coupon.model.CouponPolicy;
-import alliwannadev.shop.coupon.repository.CouponPolicyRepository;
-import alliwannadev.shop.coupon.repository.CouponRepository;
-import alliwannadev.shop.coupon.service.dto.IssueCouponParam;
+import alliwannadev.shop.core.domain.common.constant.CouponStatus;
+import alliwannadev.shop.core.domain.modules.coupon.service.dto.IssueCouponParam;
+import alliwannadev.shop.core.domain.modules.coupon.model.Coupon;
+import alliwannadev.shop.core.domain.modules.coupon.model.CouponPolicy;
+import alliwannadev.shop.core.domain.modules.coupon.repository.CouponPolicyRepository;
+import alliwannadev.shop.core.domain.modules.coupon.repository.CouponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

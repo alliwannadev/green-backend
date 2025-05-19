@@ -1,6 +1,6 @@
-package alliwannadev.shop.coupon.repository;
+package alliwannadev.shop.core.domain.modules.coupon.repository;
 
-import alliwannadev.shop.coupon.model.Coupon;
+import alliwannadev.shop.core.domain.modules.coupon.model.Coupon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,6 +1,6 @@
-package alliwannadev.shop.coupon.model;
+package alliwannadev.shop.core.domain.modules.coupon.model;
 
-import alliwannadev.shop.coupon.constant.CouponStatus;
+import alliwannadev.shop.core.domain.common.constant.CouponStatus;
 import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
