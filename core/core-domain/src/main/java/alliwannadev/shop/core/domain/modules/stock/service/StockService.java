@@ -2,6 +2,7 @@ package alliwannadev.shop.core.domain.modules.stock.service;
 
 import alliwannadev.shop.core.domain.common.error.BusinessException;
 import alliwannadev.shop.core.domain.common.error.ErrorCode;
+import alliwannadev.shop.core.domain.common.util.CustomValidator;
 import alliwannadev.shop.core.domain.modules.stock.model.Stock;
 import alliwannadev.shop.core.domain.modules.stock.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,13 @@ public class StockService {
 
     @Transactional
     public Stock create(
-            Long productOptionCombinationId
+            Long productOptionCombinationId,
+            Long quantity
     ) {
+        CustomValidator.isPositiveNumber(productOptionCombinationId);
         Stock stock = Stock.of(
                 productOptionCombinationId,
-                0L
+                quantity
         );
         return stockRepository.save(stock);
     }

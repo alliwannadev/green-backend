@@ -3,7 +3,7 @@ val querydslVersion = "5.1.0"
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    api("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.kafka:spring-kafka")
     runtimeOnly("com.h2database:h2")
@@ -18,7 +18,7 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     // Querydsl
-    implementation ("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
+    api("com.querydsl:querydsl-jpa:${querydslVersion}:jakarta")
     annotationProcessor("com.querydsl:querydsl-apt:${querydslVersion}:jakarta")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
