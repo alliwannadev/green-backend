@@ -6,6 +6,7 @@ import alliwannadev.shop.support.error.ErrorCode;
 import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "STOCK")
 @Entity
 public class StockEntity extends BaseTimeEntity {
 

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "ORDER_ITEM")
 @Entity
 public class OrderItemEntity extends BaseTimeEntity {
 

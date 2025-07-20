@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Table(name = "ORDERS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "ORDERS")
 @Entity
 public class OrderEntity extends BaseTimeEntity {
 

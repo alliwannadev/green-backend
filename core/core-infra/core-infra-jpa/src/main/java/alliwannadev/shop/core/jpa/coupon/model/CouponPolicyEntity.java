@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "COUPON_POLICY")
 @Entity
 public class CouponPolicyEntity {
 

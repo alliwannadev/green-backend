@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @EqualsAndHashCode(of = "userId", callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "USER")
 @Entity
 public class UserEntity extends BaseTimeEntity {
 

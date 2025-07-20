@@ -11,6 +11,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "CART")
 @Entity
 public class CartEntity {
 

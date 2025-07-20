@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "PRODUCT_WAREHOUSING")
 @Entity
 public class ProductWarehousingEntity extends BaseTimeEntity {
 
