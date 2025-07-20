@@ -71,7 +71,9 @@ public class ErrorResponse {
             String message,
             List<FieldError> errors
     ) {
-        return new ErrorResponse(code, message, errors);
+        return errors.isEmpty() ?
+                ErrorResponse.of(code, message) :
+                new ErrorResponse(code, message, errors);
     }
 
     public static ErrorResponse of(
