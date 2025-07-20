@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.cart.service.dto;
 
-import alliwannadev.shop.core.jpa.cart.model.Cart;
-import alliwannadev.shop.core.jpa.cart.model.CartItem;
+import alliwannadev.shop.core.jpa.cart.model.CartEntity;
+import alliwannadev.shop.core.jpa.cart.model.CartItemEntity;
 
 import java.util.List;
 
@@ -15,16 +15,16 @@ public record GetCartItemListResult(
 ) {
 
     public static GetCartItemListResult fromEntities(
-            Cart cart,
-            List<CartItem> foundCartItems
+            CartEntity cartEntity,
+            List<CartItemEntity> foundCartItemEntities
     ) {
         return new GetCartItemListResult(
-                cart.getCartId(),
-                cart.getTotalQuantity(),
-                cart.getTotalAmount(),
-                cart.getTotalDiscountedAmount(),
-                cart.getTotalPaymentAmount(),
-                foundCartItems.stream()
+                cartEntity.getCartId(),
+                cartEntity.getTotalQuantity(),
+                cartEntity.getTotalAmount(),
+                cartEntity.getTotalDiscountedAmount(),
+                cartEntity.getTotalPaymentAmount(),
+                foundCartItemEntities.stream()
                         .map(GetCartItemResult::fromEntity)
                         .toList()
         );

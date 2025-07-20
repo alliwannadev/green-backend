@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.option.service.dto;
 
-import alliwannadev.shop.core.jpa.option.model.ProductOptionCombination;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public record CreateProductOptionCombinationParam(
         String optionManagementCode
 ) {
 
-    public ProductOptionCombination toEntity(Product product) {
+    public ProductOptionCombinationEntity toEntity(ProductEntity product) {
         List<ProductOptionParam> productOptions =
                 List.of(
                         new ProductOptionParam(optionCode1, optionName1, optionValue1),
@@ -65,7 +65,7 @@ public record CreateProductOptionCombinationParam(
                         .toCharArray();
         Arrays.sort(charsOfOptionCodeValues);
 
-        return ProductOptionCombination.of(
+        return ProductOptionCombinationEntity.of(
                 product,
                 selectedOptions,
                 combinationCode,

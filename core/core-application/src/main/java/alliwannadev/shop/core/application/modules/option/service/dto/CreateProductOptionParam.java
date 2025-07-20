@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.option.service.dto;
 
-import alliwannadev.shop.core.jpa.option.model.ProductOption;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionEntity;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 
 public record CreateProductOptionParam(
         String optionCode,
@@ -9,8 +9,8 @@ public record CreateProductOptionParam(
         String optionValue
 ) {
 
-    public ProductOption toEntity(Product product) {
-        return ProductOption.of(
+    public ProductOptionEntity toEntity(ProductEntity product) {
+        return ProductOptionEntity.of(
                 product,
                 optionCode,
                 optionName,

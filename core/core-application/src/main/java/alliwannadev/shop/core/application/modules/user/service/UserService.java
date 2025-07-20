@@ -1,9 +1,9 @@
 package alliwannadev.shop.core.application.modules.user.service;
 
 import alliwannadev.shop.core.domain.common.constant.UserSearchType;
-import alliwannadev.shop.core.jpa.user.domain.User;
-import alliwannadev.shop.core.jpa.user.repository.UserQueryRepository;
-import alliwannadev.shop.core.jpa.user.repository.UserRepository;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
+import alliwannadev.shop.core.jpa.user.repository.UserQueryJpaRepository;
+import alliwannadev.shop.core.jpa.user.repository.UserJpaRepository;
 import alliwannadev.shop.core.application.modules.user.service.dto.GetUserResult;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
@@ -21,8 +21,8 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final UserQueryRepository userQueryRepository;
+    private final UserJpaRepository userJpaRepository;
+    private final UserQueryJpaRepository userQueryJpaRepository;
 
     @Transactional(readOnly = true)
     public Page<GetUserResult> getAll(
@@ -30,7 +30,7 @@ public class UserService {
             String keyword,
             Pageable pageable
     ) {
-        return userQueryRepository
+        return userQueryJpaRepository
                 .findAll(
                         searchType,
                         keyword,
@@ -41,20 +41,20 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<GetUserResult> getOneByEmail(String email) {
-        return userRepository.findOneByEmail(email).map(GetUserResult::from);
+        return userJpaRepository.findOneByEmail(email).map(GetUserResult::from);
     }
 
     @Transactional(readOnly = true)
     public GetUserResult getOneByUserId(Long userId) {
-        return userRepository
+        return userJpaRepository
                 .findById(userId)
                 .map(GetUserResult::from)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
     }
 
     @Transactional
-    public GetUserResult saveIfNotExists(User user) {
-        return getOneByEmail(user.getEmail())
-                .orElseGet(() -> GetUserResult.from(userRepository.save(user)));
+    public GetUserResult saveIfNotExists(UserEntity userEntity) {
+        return getOneByEmail(userEntity.getEmail())
+                .orElseGet(() -> GetUserResult.from(userJpaRepository.save(userEntity)));
     }
 }

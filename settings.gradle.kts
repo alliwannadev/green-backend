@@ -4,6 +4,7 @@ include(
     "core:core-domain",
     "core:core-infra",
     "core:core-infra:core-infra-jpa",
+    "core:core-infra:core-infra-redis",
     "core:core-api",
     "core:core-consumer",
     "core:core-consumer:coupon-consumer",

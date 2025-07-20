@@ -1,6 +1,6 @@
 package alliwannadev.shop.core.application.modules.product.service.dto;
 
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.core.jpa.product.repository.dto.GetProductDto;
 import com.querydsl.core.annotations.QueryProjection;
 
@@ -32,7 +32,7 @@ public record GetProductResult(
         );
     }
 
-    public static GetProductResult fromEntity(Product product) {
+    public static GetProductResult fromEntity(ProductEntity product) {
         return new GetProductResult(
                 product.getProductId(),
                 product.getProductCode(),

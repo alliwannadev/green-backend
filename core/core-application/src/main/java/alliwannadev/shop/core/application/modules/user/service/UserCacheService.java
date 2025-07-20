@@ -1,8 +1,8 @@
 package alliwannadev.shop.core.application.modules.user.service;
 
-import alliwannadev.shop.core.jpa.user.domain.User;
-import alliwannadev.shop.core.application.modules.user.repository.redis.UserRedisRepository;
-import alliwannadev.shop.core.jpa.user.repository.UserRepository;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
+import alliwannadev.shop.core.jpa.user.repository.UserJpaRepository;
+import alliwannadev.shop.core.redis.user.UserRedisRepository;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +15,22 @@ import java.util.Optional;
 @Service
 public class UserCacheService {
 
-    private final UserRepository userRepository;
+    private final UserJpaRepository userJpaRepository;
     private final UserRedisRepository userRedisRepository;
 
     public void create(String email) {
-        User user = userRepository
+        UserEntity userEntity = userJpaRepository
                 .findOneByEmail(email)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
-        userRedisRepository.create(user, Duration.ofHours(1));
+        userRedisRepository.create(
+                userEntity.toDomain(),
+                Duration.ofHours(1)
+        );
     }
 
-    public Optional<User> getOneByEmail(String email) {
-        return userRedisRepository.getOneByEmail(email);
+    public Optional<UserEntity> getOneByEmail(String email) {
+        return userRedisRepository
+                        .getOneByEmail(email)
+                        .map(UserEntity::fromDomain);
     }
 }

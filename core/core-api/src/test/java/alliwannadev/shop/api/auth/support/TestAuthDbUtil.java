@@ -5,7 +5,7 @@ import alliwannadev.shop.api.auth.controller.dto.request.SignInRequestV1;
 import alliwannadev.shop.api.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.core.application.modules.auth.AuthService;
 import alliwannadev.shop.api.user.support.TestUserRepository;
-import alliwannadev.shop.core.jpa.user.domain.User;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class TestAuthDbUtil {
     }
 
     @Transactional
-    public User createDefaultTestUserIfNotExists() {
+    public UserEntity createDefaultTestUserIfNotExists() {
         if (testUserRepository.existsByEmail(DEFAULT_TEST_USER_EMAIL)) {
             return testUserRepository
                     .findOneByEmail(DEFAULT_TEST_USER_EMAIL)

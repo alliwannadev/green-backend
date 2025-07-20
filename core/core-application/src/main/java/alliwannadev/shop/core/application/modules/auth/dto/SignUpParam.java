@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.auth.dto;
 
 import alliwannadev.shop.core.domain.common.constant.Role;
-import alliwannadev.shop.core.jpa.user.domain.User;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
 
 import java.util.Set;
 
@@ -12,8 +12,8 @@ public record SignUpParam(
     String phone
 ) {
 
-    public User toUserEntity() {
-        return User.of(
+    public UserEntity toUserEntity() {
+        return UserEntity.of(
                 email,
                 password,
                 name,

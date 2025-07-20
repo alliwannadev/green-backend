@@ -10,8 +10,8 @@ import alliwannadev.shop.api.order.controller.dto.CreateOrderRequestV1;
 import alliwannadev.shop.core.application.modules.product.service.dto.CreateProductParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
 import alliwannadev.shop.api.warehousing.support.TestProductWarehousingDbUtil;
-import alliwannadev.shop.core.jpa.option.model.ProductOptionCombination;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.support.dataserializer.DataSerializer;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
@@ -47,9 +47,9 @@ class OrderApiV1Test extends TestContainers {
         // Given
         testAuthDbUtil.createDefaultTestUserIfNotExists();
         String accessToken = testAuthDbUtil.getDefaultToken();
-        Product product = createProduct();
+        ProductEntity product = createProduct();
         Long quantity = 2L;
-        ProductOptionCombination productOptionCombination =
+        ProductOptionCombinationEntity productOptionCombination =
                 testProductOptionCombinationDbUtil
                         .getByCond(
                                 product.getProductId(),
@@ -132,7 +132,7 @@ class OrderApiV1Test extends TestContainers {
                 .andExpect(jsonPath("$.message").value(ErrorCode.INVALID_INPUT_VALUE.getMessage()));
     }
 
-    private Product createProduct() {
+    private ProductEntity createProduct() {
         CreateProductParam createProductParam = new CreateProductParam(
                 1L,
                 "NIKE-T-SHIRT-001",
@@ -154,8 +154,8 @@ class OrderApiV1Test extends TestContainers {
     }
 
     private CreateOrderRequestV1.OrderItem getCreateOrderItem(
-            Product product,
-            ProductOptionCombination productOptionCombination,
+            ProductEntity product,
+            ProductOptionCombinationEntity productOptionCombination,
             Long quantity
     ) {
         return new CreateOrderRequestV1.OrderItem(

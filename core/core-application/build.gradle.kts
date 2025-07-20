@@ -1,7 +1,6 @@
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.kafka:spring-kafka")
 
     // Commons-lang3
@@ -23,4 +22,5 @@ dependencies {
     implementation(project(":support:distributed-lock"))
     implementation(project(":core:core-domain"))
     implementation(project(":core:core-infra:core-infra-jpa"))
+    implementation(project(":core:core-infra:core-infra-redis"))
 }

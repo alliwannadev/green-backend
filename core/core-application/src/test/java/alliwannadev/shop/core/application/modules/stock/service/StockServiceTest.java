@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.stock.service;
 
-import alliwannadev.shop.core.jpa.stock.model.Stock;
-import alliwannadev.shop.core.jpa.stock.repository.StockRepository;
+import alliwannadev.shop.core.jpa.stock.model.StockEntity;
+import alliwannadev.shop.core.jpa.stock.repository.StockJpaRepository;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +24,8 @@ import static org.mockito.BDDMockito.then;
 class StockServiceTest {
 
     @InjectMocks StockService stockService;
-    @Mock StockRepository stockRepository;
+    @Mock
+    StockJpaRepository stockJpaRepository;
 
     @DisplayName("[Service] 재고 ID를 이용하여 재고 1건을 조회한다.")
     @Test
@@ -33,7 +34,7 @@ class StockServiceTest {
         Long stockId = 1L;
         Long productOptionCombinationId = 1L;
         Long quantity = 10L;
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(
                         Optional.of(
                                 StockMockFactory.buildStock(
@@ -45,7 +46,7 @@ class StockServiceTest {
                 );
 
         // When
-        Stock stock = stockService
+        StockEntity stock = stockService
                 .getOneByStockId(stockId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
 
@@ -53,7 +54,7 @@ class StockServiceTest {
         assertThat(stock.getStockId()).isEqualTo(stockId);
         assertThat(stock.getProductOptionCombinationId()).isEqualTo(productOptionCombinationId);
         assertThat(stock.getQuantity()).isEqualTo(quantity);
-        then(stockRepository).should().findById(stockId);
+        then(stockJpaRepository).should().findById(stockId);
     }
 
     @DisplayName("[Service] 존재하지 않는 재고 ID를 이용하여 재고 1건을 조회한다.")
@@ -61,15 +62,15 @@ class StockServiceTest {
     void getNotExistentStockByStockId() {
         // Given
         Long stockId = 0L;
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(Optional.empty());
 
         // When
-        Optional<Stock> stock = stockService.getOneByStockId(stockId);
+        Optional<StockEntity> stock = stockService.getOneByStockId(stockId);
 
         // Then
         assertThat(stock.isEmpty()).isTrue();
-        then(stockRepository).should().findById(stockId);
+        then(stockJpaRepository).should().findById(stockId);
     }
 
     @DisplayName("[Service] productOptionCombinationId를 이용하여 재고 1건을 조회한다.")
@@ -79,7 +80,7 @@ class StockServiceTest {
         Long stockId = 1L;
         Long productOptionCombinationId = 1L;
         Long quantity = 10L;
-        given(stockRepository.findByProductOptionCombinationId(productOptionCombinationId))
+        given(stockJpaRepository.findByProductOptionCombinationId(productOptionCombinationId))
                 .willReturn(
                         Optional.of(
                                 StockMockFactory.buildStock(
@@ -91,7 +92,7 @@ class StockServiceTest {
                 );
 
         // When
-        Stock stock = stockService
+        StockEntity stock = stockService
                 .getOneByCombinationId(stockId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
 
@@ -99,7 +100,7 @@ class StockServiceTest {
         assertThat(stock.getStockId()).isEqualTo(stockId);
         assertThat(stock.getProductOptionCombinationId()).isEqualTo(productOptionCombinationId);
         assertThat(stock.getQuantity()).isEqualTo(quantity);
-        then(stockRepository).should().findByProductOptionCombinationId(productOptionCombinationId);
+        then(stockJpaRepository).should().findByProductOptionCombinationId(productOptionCombinationId);
     }
 
     @DisplayName("[Service] 재고 1건을 생성한다.")
@@ -109,7 +110,7 @@ class StockServiceTest {
         Long stockId = 1L;
         Long productOptionCombinationId = 1L;
         Long quantity = 10L;
-        given(stockRepository.save(any(Stock.class)))
+        given(stockJpaRepository.save(any(StockEntity.class)))
                 .willReturn(
                         StockMockFactory.buildStock(
                                 stockId,
@@ -118,14 +119,14 @@ class StockServiceTest {
                         ));
 
         // When
-        Stock stock = stockService
+        StockEntity stock = stockService
                 .create(productOptionCombinationId, quantity);
 
         // Then
         assertThat(stock.getStockId()).isEqualTo(stockId);
         assertThat(stock.getProductOptionCombinationId()).isEqualTo(productOptionCombinationId);
         assertThat(stock.getQuantity()).isEqualTo(quantity);
-        then(stockRepository).should().save(any(Stock.class));
+        then(stockJpaRepository).should().save(any(StockEntity.class));
     }
 
     @DisplayName("[Service] 유효하지 않은 파라미터를 전달하면 재고 생성에 실패한다.")
@@ -142,7 +143,7 @@ class StockServiceTest {
         assertThat(thrown)
                 .isInstanceOf(BusinessException.class)
                 .hasMessageContaining(ErrorCode.INVALID_INPUT_VALUE.getMessage());
-        then(stockRepository).shouldHaveNoInteractions();
+        then(stockJpaRepository).shouldHaveNoInteractions();
     }
 
     @DisplayName("[Service] 재고 수량을 증가한다.")
@@ -153,12 +154,12 @@ class StockServiceTest {
         Long productOptionCombinationId = 1L;
         Long quantity = 10L;
         Long addedQuantity = 5L;
-        Stock stock = StockMockFactory.buildStock(
+        StockEntity stock = StockMockFactory.buildStock(
                 stockId,
                 productOptionCombinationId,
                 quantity
         );
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(Optional.of(stock));
 
         // When
@@ -176,7 +177,7 @@ class StockServiceTest {
         // Given
         Long stockId = 0L;
         Long addedQuantity = 5L;
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(Optional.empty());
 
         // When
@@ -196,12 +197,12 @@ class StockServiceTest {
         Long productOptionCombinationId = 1L;
         Long quantity = 10L;
         Long decreasedQuantity = 5L;
-        Stock stock = StockMockFactory.buildStock(
+        StockEntity stock = StockMockFactory.buildStock(
                 stockId,
                 productOptionCombinationId,
                 quantity
         );
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(Optional.of(stock));
 
         // When
@@ -219,7 +220,7 @@ class StockServiceTest {
         // Given
         Long stockId = 0L;
         Long decreasedQuantity = 5L;
-        given(stockRepository.findById(stockId))
+        given(stockJpaRepository.findById(stockId))
                 .willReturn(Optional.empty());
 
         // When

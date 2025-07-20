@@ -6,7 +6,7 @@ import alliwannadev.shop.core.application.modules.option.service.dto.CreateProdu
 import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
 import alliwannadev.shop.core.application.modules.product.service.dto.CreateProductParam;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -78,7 +78,7 @@ class ProductApiV1Test extends TestContainers {
     void givenProductId_whenSearchProduct_thenReturnSuccessfulResult() throws Exception {
         // Given
         createProduct();
-        Product product = testProductDbUtil.getFirstProductId();
+        ProductEntity product = testProductDbUtil.getFirstProductId();
         Long productId = product.getProductId();
 
         // When & Then

@@ -1,6 +1,6 @@
 package alliwannadev.shop.core.application.modules.cart.service;
 
-import alliwannadev.shop.core.jpa.cart.model.Cart;
+import alliwannadev.shop.core.jpa.cart.model.CartEntity;
 import alliwannadev.shop.core.application.modules.cart.service.dto.CreateCartItemParam;
 import alliwannadev.shop.core.application.modules.cart.service.dto.GetCartItemListResult;
 import alliwannadev.shop.core.application.modules.cart.service.dto.UpdateCartItemParam;
@@ -17,8 +17,8 @@ public class CartManagementService {
 
     @Transactional
     public GetCartItemListResult getCartItemList(Long userId) {
-        Cart createdCart = cartService.createIfNotExists(userId);
-        return cartItemService.getAllByCartId(createdCart.getCartId());
+        CartEntity createdCartEntity = cartService.createIfNotExists(userId);
+        return cartItemService.getAllByCartId(createdCartEntity.getCartId());
     }
 
     @Transactional
@@ -26,13 +26,13 @@ public class CartManagementService {
             Long userId,
             CreateCartItemParam createCartItemParam
     ) {
-        Cart createdCart = cartService.createIfNotExists(userId);
+        CartEntity createdCartEntity = cartService.createIfNotExists(userId);
         cartItemService.addOne(
-                createdCart.getCartId(),
-                createdCart,
+                createdCartEntity.getCartId(),
+                createdCartEntity,
                 createCartItemParam
         );
-        cartService.update(createdCart.getCartId());
+        cartService.update(createdCartEntity.getCartId());
     }
 
     @Transactional
@@ -41,9 +41,9 @@ public class CartManagementService {
             Long cartItemId,
             UpdateCartItemParam param
     ) {
-        Cart createdCart = cartService.createIfNotExists(userId);
+        CartEntity createdCartEntity = cartService.createIfNotExists(userId);
         cartItemService.update(cartItemId, param);
-        cartService.update(createdCart.getCartId());
+        cartService.update(createdCartEntity.getCartId());
     }
 
     @Transactional
@@ -51,8 +51,8 @@ public class CartManagementService {
             Long userId,
             Long cartItemId
     ) {
-        Cart createdCart = cartService.createIfNotExists(userId);
+        CartEntity createdCartEntity = cartService.createIfNotExists(userId);
         cartItemService.delete(cartItemId);
-        cartService.update(createdCart.getCartId());
+        cartService.update(createdCartEntity.getCartId());
     }
 }

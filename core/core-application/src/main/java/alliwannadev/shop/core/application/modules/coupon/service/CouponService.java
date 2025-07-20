@@ -2,10 +2,10 @@ package alliwannadev.shop.core.application.modules.coupon.service;
 
 import alliwannadev.shop.core.domain.common.constant.CouponStatus;
 import alliwannadev.shop.core.application.modules.coupon.service.dto.IssueCouponParam;
-import alliwannadev.shop.core.jpa.coupon.model.Coupon;
-import alliwannadev.shop.core.jpa.coupon.model.CouponPolicy;
-import alliwannadev.shop.core.jpa.coupon.repository.CouponPolicyRepository;
-import alliwannadev.shop.core.jpa.coupon.repository.CouponRepository;
+import alliwannadev.shop.core.jpa.coupon.model.CouponEntity;
+import alliwannadev.shop.core.jpa.coupon.model.CouponPolicyEntity;
+import alliwannadev.shop.core.jpa.coupon.repository.CouponPolicyJpaRepository;
+import alliwannadev.shop.core.jpa.coupon.repository.CouponJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,15 +18,15 @@ import java.util.UUID;
 @Service
 public class CouponService {
 
-    private final CouponRepository couponRepository;
-    private final CouponPolicyRepository couponPolicyRepository;
+    private final CouponJpaRepository couponJpaRepository;
+    private final CouponPolicyJpaRepository couponPolicyJpaRepository;
 
     @Transactional
     public void issueCoupon(
             IssueCouponParam param
     ) {
-        CouponPolicy couponPolicy =
-                couponPolicyRepository
+        CouponPolicyEntity couponPolicy =
+                couponPolicyJpaRepository
                         .findByCouponName(param.couponName())
                         .orElseThrow();
 
@@ -35,7 +35,7 @@ public class CouponService {
                 param.userId())
                 .isEmpty()
         ) {
-            Coupon coupon = Coupon.of(
+            CouponEntity coupon = CouponEntity.of(
                     couponPolicy,
                     param.userId(),
                     generateCouponCode(),
@@ -43,13 +43,13 @@ public class CouponService {
                     null,
                     LocalDateTime.now()
             );
-            couponRepository.save(coupon);
+            couponJpaRepository.save(coupon);
         }
     }
 
     @Transactional(readOnly = true)
-    public Optional<Coupon> getOneBy(Long couponPolicyId, Long userId) {
-        return couponRepository.findOneBy(couponPolicyId, userId);
+    public Optional<CouponEntity> getOneBy(Long couponPolicyId, Long userId) {
+        return couponJpaRepository.findOneBy(couponPolicyId, userId);
     }
 
     private String generateCouponCode() {

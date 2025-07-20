@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.order.service;
 
-import alliwannadev.shop.core.jpa.order.model.Order;
-import alliwannadev.shop.core.jpa.order.model.OrderItem;
+import alliwannadev.shop.core.jpa.order.model.OrderEntity;
+import alliwannadev.shop.core.jpa.order.model.OrderItemEntity;
 import alliwannadev.shop.core.application.modules.order.service.dto.CreateOrderParam;
 import alliwannadev.shop.core.application.modules.order.service.dto.CreateOrderResult;
 import alliwannadev.shop.support.distributedlock.DistributedLockExecutor;
@@ -25,8 +25,8 @@ public class OrderManagementService {
                 () -> orderService.create(createOrderParam)
         );
 
-        Order savedOrder = orderService.getOneByOrderNo(createOrderParam.orderNo());
-        List<OrderItem> savedOrderItemList = orderService.getOrderItemsById(savedOrder.getOrderId());
+        OrderEntity savedOrder = orderService.getOneByOrderNo(createOrderParam.orderNo());
+        List<OrderItemEntity> savedOrderItemList = orderService.getOrderItemsById(savedOrder.getOrderId());
         return CreateOrderResult.fromEntity(savedOrder, savedOrderItemList);
     }
 

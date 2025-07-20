@@ -1,11 +1,11 @@
 package alliwannadev.shop.core.application.modules.cart.service;
 
-import alliwannadev.shop.core.jpa.cart.model.Cart;
-import alliwannadev.shop.core.jpa.cart.model.CartItem;
-import alliwannadev.shop.core.jpa.cart.repository.CartItemRepository;
-import alliwannadev.shop.core.jpa.cart.repository.CartRepository;
-import alliwannadev.shop.core.jpa.user.domain.User;
-import alliwannadev.shop.core.jpa.user.repository.UserRepository;
+import alliwannadev.shop.core.jpa.cart.model.CartEntity;
+import alliwannadev.shop.core.jpa.cart.model.CartItemEntity;
+import alliwannadev.shop.core.jpa.cart.repository.CartItemJpaRepository;
+import alliwannadev.shop.core.jpa.cart.repository.CartJpaRepository;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
+import alliwannadev.shop.core.jpa.user.repository.UserJpaRepository;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -19,27 +19,27 @@ import java.util.Optional;
 @Service
 public class CartService {
 
-    private final UserRepository userRepository;
-    private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
+    private final UserJpaRepository userJpaRepository;
+    private final CartJpaRepository cartJpaRepository;
+    private final CartItemJpaRepository cartItemJpaRepository;
 
     @Transactional
-    public Cart createIfNotExists(
+    public CartEntity createIfNotExists(
             Long userId
     ) {
-        Optional<Cart> foundCart = cartRepository
+        Optional<CartEntity> foundCart = cartJpaRepository
                 .findOneByUserId(userId);
         if (foundCart.isPresent()
         ) {
             return foundCart.get();
         } else {
-            User foundUser =
-                    userRepository
+            UserEntity foundUserEntity =
+                    userJpaRepository
                             .findById(userId)
                             .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
-            return cartRepository.save(
-                    Cart.of(
-                            foundUser,
+            return cartJpaRepository.save(
+                    CartEntity.of(
+                            foundUserEntity,
                             0L,
                             0L,
                             0L,
@@ -50,7 +50,7 @@ public class CartService {
 
     @Transactional
     public void update(Long cartId) {
-        Cart foundCart = cartRepository
+        CartEntity foundCartEntity = cartJpaRepository
                 .findById(cartId)
                 .orElseThrow(
                         () -> new BusinessException(ErrorCode.CART_NOT_FOUND)
@@ -61,15 +61,15 @@ public class CartService {
         Long totalDiscountedAmount = 0L;
         Long totalPaymentAmount = 0L;
 
-        List<CartItem> foundCartItems = cartItemRepository.findAllByCartId(foundCart.getCartId());
-        for (CartItem cartItem : foundCartItems) {
-            totalQuantity += cartItem.getQuantity();
-            totalAmount += cartItem.getAmount();
-            totalDiscountedAmount += cartItem.getDiscountedAmount();
-            totalPaymentAmount += cartItem.getPaymentAmount();
+        List<CartItemEntity> foundCartItemEntities = cartItemJpaRepository.findAllByCartId(foundCartEntity.getCartId());
+        for (CartItemEntity cartItemEntity : foundCartItemEntities) {
+            totalQuantity += cartItemEntity.getQuantity();
+            totalAmount += cartItemEntity.getAmount();
+            totalDiscountedAmount += cartItemEntity.getDiscountedAmount();
+            totalPaymentAmount += cartItemEntity.getPaymentAmount();
         }
 
-        foundCart.update(
+        foundCartEntity.update(
                 totalQuantity,
                 totalAmount,
                 totalDiscountedAmount,

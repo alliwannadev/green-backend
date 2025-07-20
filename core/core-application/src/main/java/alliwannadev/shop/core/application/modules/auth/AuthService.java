@@ -4,7 +4,7 @@ import alliwannadev.shop.core.domain.common.constant.TokenType;
 import alliwannadev.shop.core.application.modules.auth.dto.SignInParam;
 import alliwannadev.shop.core.application.modules.auth.dto.SignUpParam;
 import alliwannadev.shop.core.domain.common.dto.TokenInfo;
-import alliwannadev.shop.core.jpa.user.domain.User;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
 import alliwannadev.shop.core.application.modules.user.service.UserService;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
@@ -39,18 +39,18 @@ public class AuthService {
             throw new BusinessException(ErrorCode.ALREADY_SIGNED_UP_USER);
         }
 
-        User toBeSavedUser = signUpParam.toUserEntity();
-        toBeSavedUser.updatePassword(passwordEncoder.encode(toBeSavedUser.getPassword()));
-        userService.saveIfNotExists(toBeSavedUser);
+        UserEntity toBeSavedUserEntity = signUpParam.toUserEntity();
+        toBeSavedUserEntity.updatePassword(passwordEncoder.encode(toBeSavedUserEntity.getPassword()));
+        userService.saveIfNotExists(toBeSavedUserEntity);
 
         outboxEventPublisher.publish(
                 EventType.USER_SIGNED_UP,
                 UserSignedUpEventPayload
                         .builder()
-                        .userId(toBeSavedUser.getUserId())
-                        .email(toBeSavedUser.getEmail())
+                        .userId(toBeSavedUserEntity.getUserId())
+                        .email(toBeSavedUserEntity.getEmail())
                         .build(),
-                toBeSavedUser.getUserId()
+                toBeSavedUserEntity.getUserId()
         );
     }
 

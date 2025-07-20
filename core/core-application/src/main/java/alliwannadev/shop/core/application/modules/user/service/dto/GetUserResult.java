@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.user.service.dto;
 
 import alliwannadev.shop.core.domain.common.constant.Role;
-import alliwannadev.shop.core.jpa.user.domain.User;
+import alliwannadev.shop.core.jpa.user.model.UserEntity;
 import alliwannadev.shop.core.jpa.user.repository.dto.GetUserDto;
 
 import java.util.Set;
@@ -28,15 +28,15 @@ public record GetUserResult(
         );
     }
 
-    public static GetUserResult from(User user) {
+    public static GetUserResult from(UserEntity userEntity) {
         return new GetUserResult(
-                user.getUserId(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getName(),
-                user.getPhone(),
-                user.getImageUrl(),
-                user.getRoles()
+                userEntity.getUserId(),
+                userEntity.getEmail(),
+                userEntity.getPassword(),
+                userEntity.getName(),
+                userEntity.getPhone(),
+                userEntity.getImageUrl(),
+                userEntity.getRoles()
         );
     }
 }

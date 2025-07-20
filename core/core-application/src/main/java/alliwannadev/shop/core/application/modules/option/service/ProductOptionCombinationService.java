@@ -1,9 +1,9 @@
 package alliwannadev.shop.core.application.modules.option.service;
 
-import alliwannadev.shop.core.jpa.option.model.ProductOptionCombination;
-import alliwannadev.shop.core.jpa.option.repository.ProductOptionCombinationRepository;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
+import alliwannadev.shop.core.jpa.option.repository.ProductOptionCombinationJpaRepository;
 import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.core.application.modules.stock.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,34 +18,34 @@ public class ProductOptionCombinationService {
 
     private final StockService stockService;
 
-    private final ProductOptionCombinationRepository productOptionCombinationRepository;
+    private final ProductOptionCombinationJpaRepository productOptionCombinationJpaRepository;
 
     @Transactional
     public void createAll(
-            Product product,
+            ProductEntity product,
             List<CreateProductOptionCombinationParam> combinationParams
     ) {
-        List<ProductOptionCombination> optionCombinations = combinationParams
+        List<ProductOptionCombinationEntity> optionCombinations = combinationParams
                 .stream()
                 .map(combinationParam -> combinationParam.toEntity(product))
                 .toList();
 
-        productOptionCombinationRepository.saveAll(optionCombinations);
-        for (ProductOptionCombination optionCombination : optionCombinations) {
+        productOptionCombinationJpaRepository.saveAll(optionCombinations);
+        for (ProductOptionCombinationEntity optionCombination : optionCombinations) {
             stockService.create(optionCombination.getProductOptionCombinationId(), 0L);
         }
     }
 
     @Transactional(readOnly = true)
-    public Optional<ProductOptionCombination> getByCombinationId(Long productCombinationId) {
-        return productOptionCombinationRepository.findById(productCombinationId);
+    public Optional<ProductOptionCombinationEntity> getByCombinationId(Long productCombinationId) {
+        return productOptionCombinationJpaRepository.findById(productCombinationId);
     }
 
     @Transactional(readOnly = true)
-    public Optional<ProductOptionCombination> getByCond(
+    public Optional<ProductOptionCombinationEntity> getByCond(
             Long productId,
             String selectedOptions
     ) {
-        return productOptionCombinationRepository.findByCond(productId, selectedOptions);
+        return productOptionCombinationJpaRepository.findByCond(productId, selectedOptions);
     }
 }

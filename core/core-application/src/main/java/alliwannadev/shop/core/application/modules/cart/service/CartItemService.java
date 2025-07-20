@@ -1,13 +1,13 @@
 package alliwannadev.shop.core.application.modules.cart.service;
 
-import alliwannadev.shop.core.jpa.cart.model.Cart;
-import alliwannadev.shop.core.jpa.cart.model.CartItem;
-import alliwannadev.shop.core.jpa.cart.repository.CartItemRepository;
-import alliwannadev.shop.core.jpa.cart.repository.CartRepository;
+import alliwannadev.shop.core.jpa.cart.model.CartEntity;
+import alliwannadev.shop.core.jpa.cart.model.CartItemEntity;
+import alliwannadev.shop.core.jpa.cart.repository.CartItemJpaRepository;
+import alliwannadev.shop.core.jpa.cart.repository.CartJpaRepository;
 import alliwannadev.shop.core.application.modules.cart.service.dto.CreateCartItemParam;
 import alliwannadev.shop.core.application.modules.cart.service.dto.GetCartItemListResult;
 import alliwannadev.shop.core.application.modules.cart.service.dto.UpdateCartItemParam;
-import alliwannadev.shop.core.jpa.option.model.ProductOptionCombination;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
 import alliwannadev.shop.core.application.modules.option.service.ProductOptionCombinationService;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
@@ -23,29 +23,29 @@ public class CartItemService {
 
     private final ProductOptionCombinationService productOptionCombinationService;
 
-    private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
+    private final CartJpaRepository cartJpaRepository;
+    private final CartItemJpaRepository cartItemJpaRepository;
 
     @Transactional(readOnly = true)
     public GetCartItemListResult getAllByCartId(Long cartId) {
-        Cart foundCart = cartRepository
+        CartEntity foundCartEntity = cartJpaRepository
                 .findById(cartId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.CART_NOT_FOUND));
-        List<CartItem> foundCartItems = cartItemRepository.findAllByCartId(cartId);
+        List<CartItemEntity> foundCartItemEntities = cartItemJpaRepository.findAllByCartId(cartId);
 
         return GetCartItemListResult.fromEntities(
-                foundCart,
-                foundCartItems
+                foundCartEntity,
+                foundCartItemEntities
         );
     }
 
     @Transactional
     public void addOne(
             Long cartId,
-            Cart cart,
+            CartEntity cartEntity,
             CreateCartItemParam createCartItemParam
     ) {
-        ProductOptionCombination productOptionCombination =
+        ProductOptionCombinationEntity productOptionCombination =
                 productOptionCombinationService
                         .getByCond(
                                 createCartItemParam.productId(),
@@ -53,20 +53,20 @@ public class CartItemService {
                         )
                         .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_OPTION_COMBINATION_NOT_FOUND));
 
-        CartItem newCartItem =
+        CartItemEntity newCartItemEntity =
                 createCartItemParam.toEntity(
-                        cart,
+                        cartEntity,
                         productOptionCombination.getProductOptionCombinationId()
                 );
-        cartItemRepository
+        cartItemJpaRepository
                 .findOne(
                         cartId,
-                        newCartItem.getProductId(),
-                        newCartItem.getSelectedOptions()
+                        newCartItemEntity.getProductId(),
+                        newCartItemEntity.getSelectedOptions()
                 )
                 .ifPresentOrElse(
-                        cartItem -> cartItem.updateQuantity(newCartItem.getQuantity()),
-                        () -> cartItemRepository.save(newCartItem)
+                        cartItem -> cartItem.updateQuantity(newCartItemEntity.getQuantity()),
+                        () -> cartItemJpaRepository.save(newCartItemEntity)
                 );
     }
 
@@ -75,10 +75,10 @@ public class CartItemService {
             Long cartItemId,
             UpdateCartItemParam param
     ) {
-        CartItem foundCartItem = cartItemRepository
+        CartItemEntity foundCartItemEntity = cartItemJpaRepository
                 .findById(cartItemId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.CART_ITEM_NOT_FOUND));
-        foundCartItem.update(
+        foundCartItemEntity.update(
                 param.price(),
                 param.quantity(),
                 param.amount(),
@@ -90,9 +90,9 @@ public class CartItemService {
     public void delete(
             Long cartItemId
     ) {
-        CartItem foundCartItem = cartItemRepository
+        CartItemEntity foundCartItemEntity = cartItemJpaRepository
                 .findById(cartItemId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.CART_ITEM_NOT_FOUND));
-        cartItemRepository.delete(foundCartItem);
+        cartItemJpaRepository.delete(foundCartItemEntity);
     }
 }

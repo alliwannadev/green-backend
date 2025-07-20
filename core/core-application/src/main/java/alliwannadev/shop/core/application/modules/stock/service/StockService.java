@@ -1,8 +1,8 @@
 package alliwannadev.shop.core.application.modules.stock.service;
 
 import alliwannadev.shop.core.application.common.util.CustomValidator;
-import alliwannadev.shop.core.jpa.stock.model.Stock;
-import alliwannadev.shop.core.jpa.stock.repository.StockRepository;
+import alliwannadev.shop.core.jpa.stock.model.StockEntity;
+import alliwannadev.shop.core.jpa.stock.repository.StockJpaRepository;
 import alliwannadev.shop.support.error.BusinessException;
 import alliwannadev.shop.support.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -15,29 +15,29 @@ import java.util.Optional;
 @Service
 public class StockService {
 
-    private final StockRepository stockRepository;
+    private final StockJpaRepository stockJpaRepository;
 
     @Transactional(readOnly = true)
-    public Optional<Stock> getOneByStockId(Long stockId) {
-        return stockRepository.findById(stockId);
+    public Optional<StockEntity> getOneByStockId(Long stockId) {
+        return stockJpaRepository.findById(stockId);
     }
 
     @Transactional(readOnly = true)
-    public Optional<Stock> getOneByCombinationId(Long productOptionCombinationId) {
-        return stockRepository.findByProductOptionCombinationId(productOptionCombinationId);
+    public Optional<StockEntity> getOneByCombinationId(Long productOptionCombinationId) {
+        return stockJpaRepository.findByProductOptionCombinationId(productOptionCombinationId);
     }
 
     @Transactional
-    public Stock create(
+    public StockEntity create(
             Long productOptionCombinationId,
             Long quantity
     ) {
         CustomValidator.isPositiveNumber(productOptionCombinationId);
-        Stock stock = Stock.of(
+        StockEntity stock = StockEntity.of(
                 productOptionCombinationId,
                 quantity
         );
-        return stockRepository.save(stock);
+        return stockJpaRepository.save(stock);
     }
 
     @Transactional
@@ -45,7 +45,7 @@ public class StockService {
             Long stockId,
             Long quantity
     ) {
-        Stock stock =
+        StockEntity stock =
                 getOneByStockId(stockId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
         stock.increaseQuantity(quantity);
@@ -56,7 +56,7 @@ public class StockService {
             Long stockId,
             Long quantity
     ) {
-        Stock stock =
+        StockEntity stock =
                 getOneByStockId(stockId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
         stock.decreaseQuantity(quantity);

@@ -1,8 +1,8 @@
 package alliwannadev.shop.core.application.modules.order.service.dto;
 
 import alliwannadev.shop.core.domain.common.constant.OrderStatus;
-import alliwannadev.shop.core.jpa.order.model.Order;
-import alliwannadev.shop.core.jpa.order.model.OrderItem;
+import alliwannadev.shop.core.jpa.order.model.OrderEntity;
+import alliwannadev.shop.core.jpa.order.model.OrderItemEntity;
 
 import java.util.List;
 
@@ -34,13 +34,13 @@ public record CreateOrderParam(
     ) {
     }
 
-    public List<OrderItem> toOrderItemList(
-            Order order
+    public List<OrderItemEntity> toOrderItemList(
+            OrderEntity order
     ) {
         return orderItemDtoList
                 .stream()
                 .map(orderItemDto ->
-                        OrderItem.of(
+                        OrderItemEntity.of(
                                 order,
                                 orderItemDto.productId,
                                 orderItemDto.productOptionCombinationId,
@@ -56,8 +56,8 @@ public record CreateOrderParam(
                 .toList();
     }
 
-    public Order toOrder() {
-        return Order.of(
+    public OrderEntity toOrder() {
+        return OrderEntity.of(
                 userId,
                 orderNo,
                 orderStatus,

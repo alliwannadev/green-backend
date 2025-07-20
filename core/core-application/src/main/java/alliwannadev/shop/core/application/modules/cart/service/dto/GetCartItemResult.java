@@ -1,6 +1,6 @@
 package alliwannadev.shop.core.application.modules.cart.service.dto;
 
-import alliwannadev.shop.core.jpa.cart.model.CartItem;
+import alliwannadev.shop.core.jpa.cart.model.CartItemEntity;
 
 public record GetCartItemResult(
         Long cartItemId,
@@ -15,19 +15,19 @@ public record GetCartItemResult(
         Long paymentAmount
 ) {
     public static GetCartItemResult fromEntity(
-            CartItem cartItem
+            CartItemEntity cartItemEntity
     ) {
         return new GetCartItemResult(
-                cartItem.getCartItemId(),
-                cartItem.getProductId(),
-                cartItem.getProductName(),
-                cartItem.getProductOptionCombinationId(),
-                cartItem.getThumbnailUrl(),
-                cartItem.getSelectedOptions(),
-                cartItem.getQuantity(),
-                cartItem.getAmount(),
-                cartItem.getDiscountedAmount(),
-                cartItem.getPaymentAmount()
+                cartItemEntity.getCartItemId(),
+                cartItemEntity.getProductId(),
+                cartItemEntity.getProductName(),
+                cartItemEntity.getProductOptionCombinationId(),
+                cartItemEntity.getThumbnailUrl(),
+                cartItemEntity.getSelectedOptions(),
+                cartItemEntity.getQuantity(),
+                cartItemEntity.getAmount(),
+                cartItemEntity.getDiscountedAmount(),
+                cartItemEntity.getPaymentAmount()
         );
     }
 }

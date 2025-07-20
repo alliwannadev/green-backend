@@ -1,9 +1,9 @@
 package alliwannadev.shop.api.option.support;
 
 import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionParam;
-import alliwannadev.shop.core.jpa.option.model.ProductOption;
-import alliwannadev.shop.core.jpa.option.repository.ProductOptionRepository;
-import alliwannadev.shop.core.jpa.product.model.Product;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionEntity;
+import alliwannadev.shop.core.jpa.option.repository.ProductOptionJpaRepository;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,23 +14,23 @@ import java.util.List;
 @Component
 public class TestProductOptionDbUtil {
 
-    private final ProductOptionRepository productOptionRepository;
+    private final ProductOptionJpaRepository productOptionJpaRepository;
 
     @Transactional
     public void createAll(
-            Product product,
+            ProductEntity product,
             List<CreateProductOptionParam> createProductOptionParams
     ) {
-        List<ProductOption> productOptions = createProductOptionParams
+        List<ProductOptionEntity> productOptions = createProductOptionParams
                 .stream()
                 .map(optionParam -> optionParam.toEntity(product))
                 .toList();
 
-        productOptionRepository.saveAll(productOptions);
+        productOptionJpaRepository.saveAll(productOptions);
     }
 
     @Transactional
     public void deleteAll() {
-        productOptionRepository.deleteAll();
+        productOptionJpaRepository.deleteAll();
     }
 }

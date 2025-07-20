@@ -3,9 +3,9 @@ package alliwannadev.shop.core.application.modules.product.service;
 import alliwannadev.shop.core.domain.common.dto.InfiniteScrollCond;
 import alliwannadev.shop.core.application.modules.option.service.ProductOptionCombinationService;
 import alliwannadev.shop.core.application.modules.option.service.ProductOptionService;
-import alliwannadev.shop.core.jpa.product.model.Product;
-import alliwannadev.shop.core.jpa.product.repository.ProductQueryRepository;
-import alliwannadev.shop.core.jpa.product.repository.ProductRepository;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
+import alliwannadev.shop.core.jpa.product.repository.ProductQueryJpaRepository;
+import alliwannadev.shop.core.jpa.product.repository.ProductJpaRepository;
 import alliwannadev.shop.core.jpa.product.repository.dto.GetProductDto;
 import alliwannadev.shop.core.application.modules.product.service.dto.CreateProductParam;
 import alliwannadev.shop.core.application.modules.product.service.dto.GetProductListParam;
@@ -27,13 +27,13 @@ public class ProductService {
     private final ProductOptionService productOptionService;
     private final ProductOptionCombinationService productOptionCombinationService;
 
-    private final ProductRepository productRepository;
-    private final ProductQueryRepository productQueryRepository;
+    private final ProductJpaRepository productJpaRepository;
+    private final ProductQueryJpaRepository productQueryJpaRepository;
 
     @Transactional
     public void createOne(CreateProductParam createProductParam) {
-        Product product = productRepository.save(
-                Product.of(
+        ProductEntity product = productJpaRepository.save(
+                ProductEntity.of(
                         createProductParam.productCode(),
                         createProductParam.productName(),
                         createProductParam.modelName(),
@@ -60,7 +60,7 @@ public class ProductService {
             Pageable pageable
     ) {
         Page<GetProductDto> result =
-                productQueryRepository
+                productQueryJpaRepository
                         .findAll(
                                 param.toCondition(param.categoryPath()),
                                 pageable
@@ -74,7 +74,7 @@ public class ProductService {
             String categoryPath,
             InfiniteScrollCond infiniteScrollCond
     ) {
-        List<GetProductDto> result = productQueryRepository.findAllInfiniteScroll(
+        List<GetProductDto> result = productQueryJpaRepository.findAllInfiniteScroll(
                 categoryPath,
                 infiniteScrollCond
         );
@@ -89,8 +89,8 @@ public class ProductService {
     public GetProductResult getOneByProductId(
             Long productId
     ) {
-        Product foundProduct =
-                productRepository
+        ProductEntity foundProduct =
+                productJpaRepository
                         .findById(productId)
                         .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_NOT_FOUND));
 

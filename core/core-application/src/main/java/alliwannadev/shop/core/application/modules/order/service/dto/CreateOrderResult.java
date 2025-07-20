@@ -1,8 +1,8 @@
 package alliwannadev.shop.core.application.modules.order.service.dto;
 
 import alliwannadev.shop.core.domain.common.constant.OrderStatus;
-import alliwannadev.shop.core.jpa.order.model.Order;
-import alliwannadev.shop.core.jpa.order.model.OrderItem;
+import alliwannadev.shop.core.jpa.order.model.OrderEntity;
+import alliwannadev.shop.core.jpa.order.model.OrderItemEntity;
 
 import java.util.List;
 
@@ -36,8 +36,8 @@ public record CreateOrderResult(
     }
 
     public static CreateOrderResult fromEntity(
-            Order order,
-            List<OrderItem> orderItems
+            OrderEntity order,
+            List<OrderItemEntity> orderItems
     ) {
         return new CreateOrderResult(
                 order.getOrderId(),

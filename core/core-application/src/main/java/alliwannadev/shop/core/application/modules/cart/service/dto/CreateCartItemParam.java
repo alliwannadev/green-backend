@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.application.modules.cart.service.dto;
 
-import alliwannadev.shop.core.jpa.cart.model.Cart;
-import alliwannadev.shop.core.jpa.cart.model.CartItem;
+import alliwannadev.shop.core.jpa.cart.model.CartEntity;
+import alliwannadev.shop.core.jpa.cart.model.CartItemEntity;
 
 public record CreateCartItemParam(
         Long productId,
@@ -14,12 +14,12 @@ public record CreateCartItemParam(
         Long discountedAmount
 ) {
 
-    public CartItem toEntity(
-            Cart cart,
+    public CartItemEntity toEntity(
+            CartEntity cartEntity,
             Long productOptionCombinationId
     ) {
-        return CartItem.of(
-                cart,
+        return CartItemEntity.of(
+                cartEntity,
                 productId,
                 productName,
                 productOptionCombinationId,
