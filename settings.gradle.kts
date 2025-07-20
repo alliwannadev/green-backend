@@ -1,10 +1,14 @@
 rootProject.name = "green-backend"
 include(
+    "core:core-application",
     "core:core-domain",
+    "core:core-infra",
+    "core:core-infra:core-infra-jpa",
     "core:core-api",
     "core:core-consumer",
     "core:core-consumer:coupon-consumer",
     "support:data-serializer",
+    "support:error",
     "support:snowflake",
     "support:event",
     "support:transactional-outbox",

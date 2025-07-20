@@ -1,11 +1,11 @@
 package alliwannadev.shop.api.order.controller;
 
 import alliwannadev.shop.common.dto.OkResponse;
-import alliwannadev.shop.core.domain.modules.auth.CustomUser;
+import alliwannadev.shop.core.application.modules.auth.CustomUser;
 import alliwannadev.shop.api.order.controller.dto.CreateOrderRequestV1;
 import alliwannadev.shop.api.order.controller.dto.CreateOrderResponseV1;
-import alliwannadev.shop.core.domain.modules.order.service.OrderManagementService;
-import alliwannadev.shop.core.domain.modules.order.service.dto.CreateOrderResult;
+import alliwannadev.shop.core.application.modules.order.service.OrderManagementService;
+import alliwannadev.shop.core.application.modules.order.service.dto.CreateOrderResult;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

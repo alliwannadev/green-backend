@@ -1,6 +1,6 @@
 package alliwannadev.shop.api.cart.controller.dto.response;
 
-import alliwannadev.shop.core.domain.modules.cart.service.dto.GetCartItemResult;
+import alliwannadev.shop.core.application.modules.cart.service.dto.GetCartItemResult;
 
 public record GetCartItemResponseV1(
         Long cartItemId,

@@ -1,6 +1,6 @@
 package alliwannadev.shop.api.auth.controller.dto.request;
 
-import alliwannadev.shop.core.domain.modules.auth.dto.SignUpParam;
+import alliwannadev.shop.core.application.modules.auth.dto.SignUpParam;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;

@@ -4,12 +4,12 @@ import alliwannadev.shop.core.domain.common.constant.UserSearchType;
 import alliwannadev.shop.common.dto.OkResponse;
 import alliwannadev.shop.common.dto.PaginationRequest;
 import alliwannadev.shop.common.dto.PaginationResponse;
-import alliwannadev.shop.core.domain.modules.auth.CustomUser;
+import alliwannadev.shop.core.application.modules.auth.CustomUser;
 import alliwannadev.shop.api.user.controller.dto.response.GetUserListRequestV1;
 import alliwannadev.shop.api.user.controller.dto.response.GetUserResponseV1;
 import alliwannadev.shop.api.user.controller.dto.response.GetUsersMeResponseV1;
-import alliwannadev.shop.core.domain.modules.user.domain.User;
-import alliwannadev.shop.core.domain.modules.user.service.UserService;
+import alliwannadev.shop.core.application.modules.user.service.UserService;
+import alliwannadev.shop.core.application.modules.user.service.dto.GetUserResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,9 +29,9 @@ public class UserApiV1 {
     public OkResponse<GetUsersMeResponseV1> getUsersMe(
             @AuthenticationPrincipal CustomUser customUser
     ) {
-        User findUser = userService.getOneByUserId(customUser.getUserId());
+        GetUserResult findUser = userService.getOneByUserId(customUser.getUserId());
         return OkResponse.of(
-                GetUsersMeResponseV1.fromEntity(findUser)
+                GetUsersMeResponseV1.fromDto(findUser)
         );
     }
 

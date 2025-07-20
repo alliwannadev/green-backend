@@ -2,10 +2,10 @@ package alliwannadev.shop.api.stock.repository;
 
 import alliwannadev.shop.common.TestConfig;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.core.domain.common.error.BusinessException;
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
-import alliwannadev.shop.core.domain.modules.stock.model.Stock;
-import alliwannadev.shop.core.domain.modules.stock.repository.StockRepository;
+import alliwannadev.shop.core.application.common.error.BusinessException;
+import alliwannadev.shop.core.application.common.error.ErrorCode;
+import alliwannadev.shop.core.application.modules.stock.model.Stock;
+import alliwannadev.shop.core.application.modules.stock.repository.StockRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package alliwannadev.shop.common.security;
 
-import alliwannadev.shop.core.domain.modules.auth.JwtTokenProvider;
-import alliwannadev.shop.core.domain.common.security.TokenType;
+import alliwannadev.shop.core.domain.common.constant.TokenType;
+import alliwannadev.shop.core.application.modules.auth.JwtTokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

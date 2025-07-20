@@ -1,7 +1,7 @@
 package alliwannadev.shop.api.user.controller.dto.response;
 
-import alliwannadev.shop.core.domain.common.security.Role;
-import alliwannadev.shop.core.domain.modules.user.service.dto.GetUserResult;
+import alliwannadev.shop.core.domain.common.constant.Role;
+import alliwannadev.shop.core.application.modules.user.service.dto.GetUserResult;
 
 import java.util.Set;
 

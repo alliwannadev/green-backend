@@ -1,7 +1,7 @@
 package alliwannadev.shop.api.warehousing.support;
 
-import alliwannadev.shop.core.domain.modules.warehousing.service.ProductWarehousingManagementService;
-import alliwannadev.shop.core.domain.modules.warehousing.service.dto.CreateWarehousingParam;
+import alliwannadev.shop.core.application.modules.warehousing.service.ProductWarehousingManagementService;
+import alliwannadev.shop.core.application.modules.warehousing.service.dto.CreateWarehousingParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

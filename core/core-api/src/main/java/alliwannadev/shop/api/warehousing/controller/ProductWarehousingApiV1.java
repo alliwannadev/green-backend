@@ -2,7 +2,7 @@ package alliwannadev.shop.api.warehousing.controller;
 
 import alliwannadev.shop.common.dto.OkResponse;
 import alliwannadev.shop.api.warehousing.controller.dto.CreateProductWarehousingRequestV1;
-import alliwannadev.shop.core.domain.modules.warehousing.service.ProductWarehousingManagementService;
+import alliwannadev.shop.core.application.modules.warehousing.service.ProductWarehousingManagementService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

@@ -1,8 +1,8 @@
 package alliwannadev.shop.api.order.controller.dto;
 
 import alliwannadev.shop.core.domain.common.constant.OrderStatus;
-import alliwannadev.shop.core.domain.common.util.OrderNoUtil;
-import alliwannadev.shop.core.domain.modules.order.service.dto.CreateOrderParam;
+import alliwannadev.shop.core.application.common.util.OrderNoUtil;
+import alliwannadev.shop.core.application.modules.order.service.dto.CreateOrderParam;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

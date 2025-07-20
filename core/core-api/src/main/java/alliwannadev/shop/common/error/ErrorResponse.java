@@ -1,7 +1,7 @@
 package alliwannadev.shop.common.error;
 
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
-import alliwannadev.shop.core.domain.common.error.FieldError;
+import alliwannadev.shop.support.error.ErrorCode;
+import alliwannadev.shop.support.error.FieldError;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

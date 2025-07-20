@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.domain.common.constant;
 
-import alliwannadev.shop.core.domain.common.error.BusinessException;
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
+import alliwannadev.shop.support.error.BusinessException;
+import alliwannadev.shop.support.error.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
