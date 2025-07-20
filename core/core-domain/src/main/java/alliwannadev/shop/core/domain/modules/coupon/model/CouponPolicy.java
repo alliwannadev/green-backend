@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.domain.modules.coupon.model;
 
 import alliwannadev.shop.core.domain.common.constant.CouponDiscountType;
-import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
+import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.*;
 import lombok.*;
 

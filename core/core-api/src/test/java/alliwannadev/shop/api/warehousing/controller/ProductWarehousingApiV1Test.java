@@ -17,7 +17,7 @@ import alliwannadev.shop.api.stock.support.TestStockDbUtil;
 import alliwannadev.shop.core.domain.modules.stock.model.Stock;
 import alliwannadev.shop.api.warehousing.controller.dto.CreateProductWarehousingRequestV1;
 import alliwannadev.shop.api.user.support.TestUserDbUtil;
-import alliwannadev.shop.supports.dataserializer.DataSerializer;
+import alliwannadev.shop.support.dataserializer.DataSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;

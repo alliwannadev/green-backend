@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.domain.modules.warehousing.service;
 
 import alliwannadev.shop.core.domain.modules.warehousing.service.dto.CreateWarehousingParam;
-import alliwannadev.shop.supports.distributedlock.DistributedLockExecutor;
+import alliwannadev.shop.support.distributedlock.DistributedLockExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
 package alliwannadev.shop.coupon.consumer;
 
 import alliwannadev.shop.coupon.service.CouponEventService;
-import alliwannadev.shop.supports.event.Event;
-import alliwannadev.shop.supports.event.EventPayload;
-import alliwannadev.shop.supports.event.EventType;
+import alliwannadev.shop.support.event.Event;
+import alliwannadev.shop.support.event.EventPayload;
+import alliwannadev.shop.support.event.EventType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

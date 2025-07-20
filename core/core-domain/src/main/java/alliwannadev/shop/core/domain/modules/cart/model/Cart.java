@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.domain.modules.cart.model;
 
 import alliwannadev.shop.core.domain.modules.user.domain.User;
-import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
+import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

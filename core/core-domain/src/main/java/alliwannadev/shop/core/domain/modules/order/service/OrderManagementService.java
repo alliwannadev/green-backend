@@ -4,7 +4,7 @@ import alliwannadev.shop.core.domain.modules.order.model.Order;
 import alliwannadev.shop.core.domain.modules.order.model.OrderItem;
 import alliwannadev.shop.core.domain.modules.order.service.dto.CreateOrderParam;
 import alliwannadev.shop.core.domain.modules.order.service.dto.CreateOrderResult;
-import alliwannadev.shop.supports.distributedlock.DistributedLockExecutor;
+import alliwannadev.shop.support.distributedlock.DistributedLockExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

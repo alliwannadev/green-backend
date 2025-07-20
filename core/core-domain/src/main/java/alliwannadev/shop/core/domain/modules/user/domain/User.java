@@ -3,7 +3,7 @@ package alliwannadev.shop.core.domain.modules.user.domain;
 import alliwannadev.shop.core.domain.common.model.BaseTimeEntity;
 import alliwannadev.shop.core.domain.common.security.Role;
 import alliwannadev.shop.core.domain.common.util.RolesConverter;
-import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
+import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.*;
 import lombok.*;
 

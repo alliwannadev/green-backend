@@ -26,11 +26,11 @@ dependencies {
     // P6Spy
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.2")
     
-    implementation(project(":supports:snowflake"))
-    implementation(project(":supports:data-serializer"))
-    implementation(project(":supports:event"))
-    implementation(project(":supports:transactional-outbox"))
-    implementation(project(":supports:distributed-lock"))
+    implementation(project(":support:snowflake"))
+    implementation(project(":support:data-serializer"))
+    implementation(project(":support:event"))
+    implementation(project(":support:transactional-outbox"))
+    implementation(project(":support:distributed-lock"))
 }
 
 // QueryDSL Build 옵션

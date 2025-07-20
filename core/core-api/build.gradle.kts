@@ -17,10 +17,10 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.17.0")
 
     // Test
-    testImplementation(project(":supports:snowflake"))
-    testImplementation(project(":supports:data-serializer"))
-    testImplementation(project(":supports:event"))
-    testImplementation(project(":supports:transactional-outbox"))
+    testImplementation(project(":support:snowflake"))
+    testImplementation(project(":support:data-serializer"))
+    testImplementation(project(":support:event"))
+    testImplementation(project(":support:transactional-outbox"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.kafka:spring-kafka")

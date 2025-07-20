@@ -3,7 +3,7 @@ package alliwannadev.shop.core.domain.modules.stock.model;
 import alliwannadev.shop.core.domain.common.error.BusinessException;
 import alliwannadev.shop.core.domain.common.error.ErrorCode;
 import alliwannadev.shop.core.domain.common.model.BaseTimeEntity;
-import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
+import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;

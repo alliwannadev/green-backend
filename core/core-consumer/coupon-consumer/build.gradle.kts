@@ -11,6 +11,6 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
 
     implementation(project(":core:core-domain"))
-    implementation(project(":supports:snowflake"))
-    implementation(project(":supports:event"))
+    implementation(project(":support:snowflake"))
+    implementation(project(":support:event"))
 }

@@ -14,7 +14,7 @@ import alliwannadev.shop.core.domain.modules.product.model.Product;
 import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
 import alliwannadev.shop.api.warehousing.support.TestProductWarehousingDbUtil;
-import alliwannadev.shop.supports.dataserializer.DataSerializer;
+import alliwannadev.shop.support.dataserializer.DataSerializer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

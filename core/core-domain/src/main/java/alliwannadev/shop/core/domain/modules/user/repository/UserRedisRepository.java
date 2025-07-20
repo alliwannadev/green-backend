@@ -1,7 +1,7 @@
 package alliwannadev.shop.core.domain.modules.user.repository;
 
 import alliwannadev.shop.core.domain.modules.user.domain.User;
-import alliwannadev.shop.supports.dataserializer.DataSerializer;
+import alliwannadev.shop.support.dataserializer.DataSerializer;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;

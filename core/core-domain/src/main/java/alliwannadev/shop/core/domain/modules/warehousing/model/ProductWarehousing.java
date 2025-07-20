@@ -2,7 +2,7 @@ package alliwannadev.shop.core.domain.modules.warehousing.model;
 
 import alliwannadev.shop.core.domain.common.model.BaseTimeEntity;
 import alliwannadev.shop.core.domain.modules.stock.model.Stock;
-import alliwannadev.shop.supports.snowflake.GeneratedSnowflake;
+import alliwannadev.shop.support.snowflake.GeneratedSnowflake;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
