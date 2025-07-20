@@ -32,7 +32,7 @@ public class ProductOptionCombinationService {
 
         productOptionCombinationRepository.saveAll(optionCombinations);
         for (ProductOptionCombination optionCombination : optionCombinations) {
-            stockService.create(optionCombination.getProductOptionCombinationId());
+            stockService.create(optionCombination.getProductOptionCombinationId(), 0L);
         }
     }
 

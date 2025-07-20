@@ -13,9 +13,6 @@ dependencies {
 
     implementation(project(":core:core-domain"))
 
-    // TODO: 삭제 대상
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
     // Commons-lang3
     implementation("org.apache.commons:commons-lang3:3.17.0")
 
