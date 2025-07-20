@@ -1,9 +1,9 @@
 package alliwannadev.shop.core.application.modules.stock.service;
 
-import alliwannadev.shop.core.application.common.error.BusinessException;
-import alliwannadev.shop.core.application.common.error.ErrorCode;
 import alliwannadev.shop.core.jpa.stock.model.Stock;
 import alliwannadev.shop.core.jpa.stock.repository.StockRepository;
+import alliwannadev.shop.support.error.BusinessException;
+import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
