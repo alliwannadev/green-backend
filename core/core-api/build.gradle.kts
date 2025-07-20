@@ -25,11 +25,7 @@ dependencies {
     testImplementation(project(":support:event"))
     testImplementation(project(":support:transactional-outbox"))
 
-    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
-    testAnnotationProcessor("com.querydsl:querydsl-apt:5.1.0:jakarta")
-    testAnnotationProcessor("jakarta.annotation:jakarta.annotation-api")
-    testAnnotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    testImplementation(project(":core:core-infra:core-infra-jpa"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.kafka:spring-kafka")

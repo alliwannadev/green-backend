@@ -2,10 +2,10 @@ package alliwannadev.shop.api.stock.repository;
 
 import alliwannadev.shop.common.TestConfig;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.core.application.common.error.BusinessException;
-import alliwannadev.shop.core.application.common.error.ErrorCode;
-import alliwannadev.shop.core.application.modules.stock.model.Stock;
-import alliwannadev.shop.core.application.modules.stock.repository.StockRepository;
+import alliwannadev.shop.core.jpa.stock.model.Stock;
+import alliwannadev.shop.core.jpa.stock.repository.StockRepository;
+import alliwannadev.shop.support.error.BusinessException;
+import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 class StockRepositoryTest extends TestContainers {
 
-    @Autowired StockRepository stockRepository;
+    @Autowired
+    StockRepository stockRepository;
 
     @DisplayName("[데이터베이스] productOptionCombinationId를 이용하여 재고 1건을 조회한다.")
     @Test

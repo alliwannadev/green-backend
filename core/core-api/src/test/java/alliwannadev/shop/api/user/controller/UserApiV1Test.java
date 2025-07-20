@@ -3,7 +3,7 @@ package alliwannadev.shop.api.user.controller;
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.api.auth.support.TestAuthDbUtil;
-import alliwannadev.shop.core.application.modules.user.domain.User;
+import alliwannadev.shop.core.jpa.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
