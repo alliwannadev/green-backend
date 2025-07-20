@@ -1,1 +1,1 @@
-alliwannadev.shop.support.outbox.MessageRelayConfig
+alliwannadev.shop.support.outbox.KafkaEventSenderConfig

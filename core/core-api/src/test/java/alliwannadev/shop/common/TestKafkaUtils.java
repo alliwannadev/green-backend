@@ -3,7 +3,7 @@ package alliwannadev.shop.common;
 import alliwannadev.shop.support.event.Event;
 import alliwannadev.shop.support.event.EventPayload;
 import alliwannadev.shop.support.event.EventType;
-import alliwannadev.shop.support.outbox.MessageRelay;
+import alliwannadev.shop.support.outbox.KafkaEventSender;
 import alliwannadev.shop.support.outbox.Outbox;
 import alliwannadev.shop.support.outbox.OutboxEvent;
 import alliwannadev.shop.support.outbox.OutboxEventPublisher;
@@ -100,7 +100,7 @@ public class TestKafkaUtils {
 
     public static void mockPublishingOutboxEvent(
             OutboxEventPublisher mockBeanOfOutboxEventPublisher,
-            MessageRelay messageRelay
+            KafkaEventSender kafkaEventSender
     ) {
         BDDMockito.will(invocation -> {
                     Snowflake snowflake = new Snowflake(1L);
@@ -119,7 +119,7 @@ public class TestKafkaUtils {
                                     payload
                             ).toJson()
                     );
-                    messageRelay.publishEvent(OutboxEvent.of(outbox));
+                    kafkaEventSender.publishEvent(OutboxEvent.of(outbox));
 
                     return null;
                 }).given(mockBeanOfOutboxEventPublisher)

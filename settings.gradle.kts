@@ -1,13 +1,15 @@
 rootProject.name = "green-backend"
 include(
+    "core:core-api",
+    "core:core-scheduler",
+    "core:core-scheduler:message-relay",
+    "core:core-consumer",
+    "core:core-consumer:coupon-consumer",
     "core:core-application",
     "core:core-domain",
     "core:core-infra",
     "core:core-infra:core-infra-jpa",
     "core:core-infra:core-infra-redis",
-    "core:core-api",
-    "core:core-consumer",
-    "core:core-consumer:coupon-consumer",
     "support:data-serializer",
     "support:error",
     "support:snowflake",

@@ -12,7 +12,7 @@ import alliwannadev.shop.support.event.Event;
 import alliwannadev.shop.support.event.EventPayload;
 import alliwannadev.shop.support.event.EventType;
 import alliwannadev.shop.support.event.payload.UserSignedUpEventPayload;
-import alliwannadev.shop.support.outbox.MessageRelay;
+import alliwannadev.shop.support.outbox.KafkaEventSender;
 import alliwannadev.shop.support.outbox.OutboxEventPublisher;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.AfterEach;
@@ -41,7 +41,8 @@ class AuthApiV1Test extends TestContainers {
     @Autowired TestAuthDbUtil testAuthDbUtil;
 
     @MockitoBean OutboxEventPublisher outboxEventPublisher;
-    @Autowired MessageRelay messageRelay;
+    @Autowired
+    KafkaEventSender kafkaEventSender;
 
     @AfterEach
     void tearDown() {
@@ -55,7 +56,7 @@ class AuthApiV1Test extends TestContainers {
         SignUpRequestV1 signUpRequestV1 = new SignUpRequestV1("tester@test.com", "123456", "dh", "01011112222");
         String requestBody = DataSerializer.serialize(signUpRequestV1);
         TestKafkaUtils.createTopic(EventType.USER_SIGNED_UP.getTopic(), 3, (short) 1);
-        TestKafkaUtils.mockPublishingOutboxEvent(outboxEventPublisher, messageRelay);
+        TestKafkaUtils.mockPublishingOutboxEvent(outboxEventPublisher, kafkaEventSender);
 
         // When & Then
         callSignUpApiV1(requestBody)
