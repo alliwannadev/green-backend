@@ -13,6 +13,6 @@ Content-Type: application/json
 %}
 
 ### 2. 장바구니 항목 1건 삭제
-DELETE {{host}}/v1/cartEntity-items/5711387611369472
+DELETE {{host}}/v1/cart-items/5711387611369472
 Content-Type: application/json
 Authorization: {{accessToken}}
