@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EntityScan(basePackages = "alliwannadev.shop")
 @EnableJpaRepositories(basePackages = "alliwannadev.shop")
-@ComponentScan("alliwannadev.shop.core.application")
+@ComponentScan("alliwannadev.shop.core")
 @Configuration
 public class CoreApplicationConfig {
 

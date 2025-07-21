@@ -19,9 +19,6 @@ spring:
   kafka:
     bootstrap-servers: 127.0.0.1:9092
 
-app:
-  node-id: 1
-
 # local 환경에서만 P6Spy 활성화
 decorator:
   datasource:

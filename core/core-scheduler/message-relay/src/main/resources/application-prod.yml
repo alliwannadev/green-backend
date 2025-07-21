@@ -18,6 +18,3 @@ spring:
 
   kafka:
     bootstrap-servers: ${PROD_KAFKA_BOOTSTRAP_SERVERS}
-
-app:
-  node-id: ${PROD_NODE_ID}

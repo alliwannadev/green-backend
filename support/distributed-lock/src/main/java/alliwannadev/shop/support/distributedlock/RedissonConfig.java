@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@ComponentScan("alliwannadev.shop.supports.distributedlock")
+@ComponentScan("alliwannadev.shop.support.distributedlock")
 @Configuration
 public class RedissonConfig {
 

@@ -3,6 +3,7 @@ package alliwannadev.shop.api.user.controller;
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.api.auth.support.TestAuthDbUtil;
+import alliwannadev.shop.core.api.user.controller.UserApiPaths;
 import alliwannadev.shop.core.jpa.user.model.UserEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

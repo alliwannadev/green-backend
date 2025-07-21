@@ -1,7 +1,7 @@
 package alliwannadev.shop.api.option.support;
 
-import alliwannadev.shop.core.application.modules.option.service.ProductOptionCombinationService;
-import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.application.option.service.ProductOptionCombinationService;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionCombinationParam;
 import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
 import alliwannadev.shop.core.jpa.option.repository.ProductOptionCombinationJpaRepository;
 import alliwannadev.shop.core.jpa.product.model.ProductEntity;

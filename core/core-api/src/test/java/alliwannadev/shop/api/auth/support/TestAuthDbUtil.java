@@ -1,9 +1,9 @@
 package alliwannadev.shop.api.auth.support;
 
 import alliwannadev.shop.core.domain.common.dto.TokenInfo;
-import alliwannadev.shop.api.auth.controller.dto.request.SignInRequestV1;
-import alliwannadev.shop.api.auth.controller.dto.request.SignUpRequestV1;
-import alliwannadev.shop.core.application.modules.auth.AuthService;
+import alliwannadev.shop.core.api.auth.controller.dto.request.SignInRequestV1;
+import alliwannadev.shop.core.api.auth.controller.dto.request.SignUpRequestV1;
+import alliwannadev.shop.core.application.auth.AuthService;
 import alliwannadev.shop.api.user.support.TestUserRepository;
 import alliwannadev.shop.core.jpa.user.model.UserEntity;
 import lombok.RequiredArgsConstructor;

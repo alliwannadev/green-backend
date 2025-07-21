@@ -4,6 +4,8 @@ import java.time.Instant;
 
 public class Snowflake {
 
+    public static final int NODE_COUNT = 1024;
+
     private static final int UNUSED_BITS = 1; // Sign bit, Unused (always set to 0)
     private static final int TIMESTAMP_BITS = 41;
     private static final int NODE_ID_BITS = 10;
@@ -22,7 +24,6 @@ public class Snowflake {
 
     public Snowflake(long nodeId) {
         if (nodeId < 0 || nodeId > MAX_NODE_ID) {
-            System.out.println("nodeId = " + nodeId);
             throw new IllegalArgumentException(String.format("nodeId must be between %d and %d", 0, MAX_NODE_ID));
         }
 

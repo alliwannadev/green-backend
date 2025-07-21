@@ -28,6 +28,3 @@ spring:
 
 jwt:
   access_secret: ${PROD_ACCESS_SECRET}
-
-app:
-  node-id: ${PROD_NODE_ID}

@@ -2,10 +2,11 @@ package alliwannadev.shop.api.product.controller;
 
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.core.application.modules.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.api.product.controller.ProductApiPaths;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
-import alliwannadev.shop.core.application.modules.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.application.product.service.dto.CreateProductParam;
 import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;

@@ -1,5 +1,6 @@
 package alliwannadev.shop.core.application.modules.stock.service;
 
+import alliwannadev.shop.core.application.stock.service.StockService;
 import alliwannadev.shop.core.jpa.stock.model.StockEntity;
 import alliwannadev.shop.core.jpa.stock.repository.StockJpaRepository;
 import alliwannadev.shop.support.error.BusinessException;
@@ -23,7 +24,8 @@ import static org.mockito.BDDMockito.then;
 @ExtendWith(MockitoExtension.class)
 class StockServiceTest {
 
-    @InjectMocks StockService stockService;
+    @InjectMocks
+    StockService stockService;
     @Mock
     StockJpaRepository stockJpaRepository;
 

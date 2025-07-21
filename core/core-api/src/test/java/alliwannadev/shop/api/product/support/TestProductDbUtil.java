@@ -2,7 +2,7 @@ package alliwannadev.shop.api.product.support;
 
 import alliwannadev.shop.api.option.support.TestProductOptionCombinationDbUtil;
 import alliwannadev.shop.api.option.support.TestProductOptionDbUtil;
-import alliwannadev.shop.core.application.modules.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.application.product.service.dto.CreateProductParam;
 import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import alliwannadev.shop.core.jpa.product.repository.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
