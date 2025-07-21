@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "alliwannadev"
-version = "1.0.0"
+version = "1.0.1"
 
 val javaVersion = "21"
 java.sourceCompatibility = JavaVersion.valueOf("VERSION_${javaVersion}")
@@ -18,6 +18,7 @@ configurations {
 
 subprojects {
 	apply(plugin = "java")
+	apply(plugin = "java-library")
 	apply(plugin = "io.spring.dependency-management")
 	apply(plugin = "org.springframework.boot")
 

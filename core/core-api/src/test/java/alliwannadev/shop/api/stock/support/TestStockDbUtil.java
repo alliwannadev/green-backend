@@ -1,7 +1,7 @@
 package alliwannadev.shop.api.stock.support;
 
-import alliwannadev.shop.core.domain.modules.stock.model.Stock;
-import alliwannadev.shop.core.domain.modules.stock.repository.StockRepository;
+import alliwannadev.shop.core.jpa.stock.model.StockEntity;
+import alliwannadev.shop.core.jpa.stock.repository.StockJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +12,14 @@ import java.util.Optional;
 @Component
 public class TestStockDbUtil {
 
-    private final StockRepository stockRepository;
+    private final StockJpaRepository stockJpaRepository;
 
     @Transactional
     public void deleteAll() {
-        stockRepository.deleteAll();
+        stockJpaRepository.deleteAll();
     }
 
-    public Optional<Stock> getOneByCombinationId(Long productOptionCombinationId) {
-        return stockRepository.findByProductOptionCombinationId(productOptionCombinationId);
+    public Optional<StockEntity> getOneByCombinationId(Long productOptionCombinationId) {
+        return stockJpaRepository.findByProductOptionCombinationId(productOptionCombinationId);
     }
 }

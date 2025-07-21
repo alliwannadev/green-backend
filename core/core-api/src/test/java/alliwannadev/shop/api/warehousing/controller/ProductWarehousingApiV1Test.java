@@ -2,22 +2,23 @@ package alliwannadev.shop.api.warehousing.controller;
 
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.core.domain.common.error.BusinessException;
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
 import alliwannadev.shop.api.auth.support.TestAuthDbUtil;
 import alliwannadev.shop.api.option.support.TestProductOptionCombinationDbUtil;
 import alliwannadev.shop.api.option.support.TestProductOptionDbUtil;
-import alliwannadev.shop.core.domain.modules.option.model.ProductOptionCombination;
-import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.api.warehousing.controller.ProductWarehousingApiPaths;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
-import alliwannadev.shop.core.domain.modules.product.model.Product;
-import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.application.product.service.dto.CreateProductParam;
 import alliwannadev.shop.api.stock.support.TestStockDbUtil;
-import alliwannadev.shop.core.domain.modules.stock.model.Stock;
-import alliwannadev.shop.api.warehousing.controller.dto.CreateProductWarehousingRequestV1;
+import alliwannadev.shop.core.api.warehousing.controller.dto.CreateProductWarehousingRequestV1;
 import alliwannadev.shop.api.user.support.TestUserDbUtil;
-import alliwannadev.shop.supports.dataserializer.DataSerializer;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
+import alliwannadev.shop.core.jpa.stock.model.StockEntity;
+import alliwannadev.shop.support.dataserializer.DataSerializer;
+import alliwannadev.shop.support.error.BusinessException;
+import alliwannadev.shop.support.error.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -71,8 +72,8 @@ class ProductWarehousingApiV1Test extends TestContainers {
         // Given
         testAuthDbUtil.createDefaultTestUserIfNotExists();
         String accessToken = testAuthDbUtil.getDefaultToken();
-        Product product = createProduct();
-        ProductOptionCombination productOptionCombination =
+        ProductEntity product = createProduct();
+        ProductOptionCombinationEntity productOptionCombination =
                 testProductOptionCombinationDbUtil
                         .getByCond(
                                 product.getProductId(),
@@ -103,7 +104,7 @@ class ProductWarehousingApiV1Test extends TestContainers {
                 .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
                 .andExpect(jsonPath("$.message").value("상품 입고를 완료했습니다."));
 
-        Stock stock = testStockDbUtil
+        StockEntity stock = testStockDbUtil
                 .getOneByCombinationId(productOptionCombination.getProductOptionCombinationId())
                 .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
         assertThat(stock.getQuantity()).isEqualTo(1L);
@@ -115,8 +116,8 @@ class ProductWarehousingApiV1Test extends TestContainers {
         // Given
         testAuthDbUtil.createDefaultTestUserIfNotExists();
         String accessToken = testAuthDbUtil.getDefaultToken();
-        Product product = createProduct();
-        ProductOptionCombination productOptionCombination =
+        ProductEntity product = createProduct();
+        ProductOptionCombinationEntity productOptionCombination =
                 testProductOptionCombinationDbUtil
                         .getByCond(
                                 product.getProductId(),
@@ -161,13 +162,13 @@ class ProductWarehousingApiV1Test extends TestContainers {
         }
 
         countDownLatch.await();
-        Stock stock = testStockDbUtil
+        StockEntity stock = testStockDbUtil
                 .getOneByCombinationId(productOptionCombination.getProductOptionCombinationId())
                 .orElseThrow(() -> new BusinessException(ErrorCode.STOCK_NOT_FOUND));
         assertThat(stock.getQuantity()).isEqualTo(requestCount);
     }
 
-    private Product createProduct() {
+    private ProductEntity createProduct() {
         CreateProductParam createProductParam = new CreateProductParam(
                 1L,
                 "NIKE-T-SHIRT-001",

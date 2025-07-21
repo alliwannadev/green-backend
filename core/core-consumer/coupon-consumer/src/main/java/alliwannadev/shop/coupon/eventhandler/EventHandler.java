@@ -1,7 +1,7 @@
 package alliwannadev.shop.coupon.eventhandler;
 
-import alliwannadev.shop.supports.event.Event;
-import alliwannadev.shop.supports.event.EventPayload;
+import alliwannadev.shop.support.event.Event;
+import alliwannadev.shop.support.event.EventPayload;
 
 public interface EventHandler {
 

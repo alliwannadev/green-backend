@@ -3,17 +3,18 @@ package alliwannadev.shop.api.auth.controller;
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
 import alliwannadev.shop.common.TestKafkaUtils;
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
-import alliwannadev.shop.api.auth.controller.dto.request.SignInRequestV1;
-import alliwannadev.shop.api.auth.controller.dto.request.SignUpRequestV1;
+import alliwannadev.shop.core.api.auth.controller.AuthApiPaths;
+import alliwannadev.shop.core.api.auth.controller.dto.request.SignInRequestV1;
+import alliwannadev.shop.core.api.auth.controller.dto.request.SignUpRequestV1;
 import alliwannadev.shop.api.auth.support.TestAuthDbUtil;
-import alliwannadev.shop.supports.dataserializer.DataSerializer;
-import alliwannadev.shop.supports.event.Event;
-import alliwannadev.shop.supports.event.EventPayload;
-import alliwannadev.shop.supports.event.EventType;
-import alliwannadev.shop.supports.event.payload.UserSignedUpEventPayload;
-import alliwannadev.shop.supports.outbox.MessageRelay;
-import alliwannadev.shop.supports.outbox.OutboxEventPublisher;
+import alliwannadev.shop.support.dataserializer.DataSerializer;
+import alliwannadev.shop.support.error.ErrorCode;
+import alliwannadev.shop.support.event.Event;
+import alliwannadev.shop.support.event.EventPayload;
+import alliwannadev.shop.support.event.EventType;
+import alliwannadev.shop.support.event.payload.UserSignedUpEventPayload;
+import alliwannadev.shop.support.outbox.KafkaEventSender;
+import alliwannadev.shop.support.outbox.OutboxEventPublisher;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +42,8 @@ class AuthApiV1Test extends TestContainers {
     @Autowired TestAuthDbUtil testAuthDbUtil;
 
     @MockitoBean OutboxEventPublisher outboxEventPublisher;
-    @Autowired MessageRelay messageRelay;
+    @Autowired
+    KafkaEventSender kafkaEventSender;
 
     @AfterEach
     void tearDown() {
@@ -55,7 +57,7 @@ class AuthApiV1Test extends TestContainers {
         SignUpRequestV1 signUpRequestV1 = new SignUpRequestV1("tester@test.com", "123456", "dh", "01011112222");
         String requestBody = DataSerializer.serialize(signUpRequestV1);
         TestKafkaUtils.createTopic(EventType.USER_SIGNED_UP.getTopic(), 3, (short) 1);
-        TestKafkaUtils.mockPublishingOutboxEvent(outboxEventPublisher, messageRelay);
+        TestKafkaUtils.mockPublishingOutboxEvent(outboxEventPublisher, kafkaEventSender);
 
         // When & Then
         callSignUpApiV1(requestBody)

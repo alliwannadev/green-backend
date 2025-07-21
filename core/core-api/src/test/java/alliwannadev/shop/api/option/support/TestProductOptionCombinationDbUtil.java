@@ -1,10 +1,10 @@
 package alliwannadev.shop.api.option.support;
 
-import alliwannadev.shop.core.domain.modules.option.model.ProductOptionCombination;
-import alliwannadev.shop.core.domain.modules.option.repository.ProductOptionCombinationRepository;
-import alliwannadev.shop.core.domain.modules.option.service.ProductOptionCombinationService;
-import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.core.domain.modules.product.model.Product;
+import alliwannadev.shop.core.application.option.service.ProductOptionCombinationService;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.jpa.option.model.ProductOptionCombinationEntity;
+import alliwannadev.shop.core.jpa.option.repository.ProductOptionCombinationJpaRepository;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,26 +17,26 @@ import java.util.Optional;
 public class TestProductOptionCombinationDbUtil {
 
     private final ProductOptionCombinationService productOptionCombinationService;
-    private final ProductOptionCombinationRepository productOptionCombinationRepository;
+    private final ProductOptionCombinationJpaRepository productOptionCombinationJpaRepository;
 
     @Transactional
     public void createAll(
-            Product product,
+            ProductEntity product,
             List<CreateProductOptionCombinationParam> combinationParams
     ) {
         productOptionCombinationService.createAll(product, combinationParams);
     }
 
     @Transactional
-    public Optional<ProductOptionCombination> getByCond(
+    public Optional<ProductOptionCombinationEntity> getByCond(
             Long productId,
             String selectedOptions
     ) {
-        return productOptionCombinationRepository.findByCond(productId, selectedOptions);
+        return productOptionCombinationJpaRepository.findByCond(productId, selectedOptions);
     }
 
     @Transactional
     public void deleteAll() {
-        productOptionCombinationRepository.deleteAll();
+        productOptionCombinationJpaRepository.deleteAll();
     }
 }
