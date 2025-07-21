@@ -1,13 +1,13 @@
 package alliwannadev.shop.common;
 
-import alliwannadev.shop.supports.event.Event;
-import alliwannadev.shop.supports.event.EventPayload;
-import alliwannadev.shop.supports.event.EventType;
-import alliwannadev.shop.supports.outbox.MessageRelay;
-import alliwannadev.shop.supports.outbox.Outbox;
-import alliwannadev.shop.supports.outbox.OutboxEvent;
-import alliwannadev.shop.supports.outbox.OutboxEventPublisher;
-import alliwannadev.shop.supports.snowflake.Snowflake;
+import alliwannadev.shop.support.event.Event;
+import alliwannadev.shop.support.event.EventPayload;
+import alliwannadev.shop.support.event.EventType;
+import alliwannadev.shop.support.outbox.KafkaEventSender;
+import alliwannadev.shop.support.outbox.Outbox;
+import alliwannadev.shop.support.outbox.OutboxEvent;
+import alliwannadev.shop.support.outbox.OutboxEventPublisher;
+import alliwannadev.shop.support.snowflake.Snowflake;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
@@ -100,7 +100,7 @@ public class TestKafkaUtils {
 
     public static void mockPublishingOutboxEvent(
             OutboxEventPublisher mockBeanOfOutboxEventPublisher,
-            MessageRelay messageRelay
+            KafkaEventSender kafkaEventSender
     ) {
         BDDMockito.will(invocation -> {
                     Snowflake snowflake = new Snowflake(1L);
@@ -119,7 +119,7 @@ public class TestKafkaUtils {
                                     payload
                             ).toJson()
                     );
-                    messageRelay.publishEvent(OutboxEvent.of(outbox));
+                    kafkaEventSender.publishEvent(OutboxEvent.of(outbox));
 
                     return null;
                 }).given(mockBeanOfOutboxEventPublisher)

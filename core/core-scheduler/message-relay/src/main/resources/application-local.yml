@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/green
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate.ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate.default_batch_fetch_size: 100
+
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+
+# local 환경에서만 P6Spy 활성화
+decorator:
+  datasource:
+    enabled: true

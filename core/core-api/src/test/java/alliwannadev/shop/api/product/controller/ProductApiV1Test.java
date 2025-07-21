@@ -2,12 +2,13 @@ package alliwannadev.shop.api.product.controller;
 
 import alliwannadev.shop.common.IntegrationTest;
 import alliwannadev.shop.common.TestContainers;
-import alliwannadev.shop.core.domain.common.error.ErrorCode;
-import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionCombinationParam;
-import alliwannadev.shop.core.domain.modules.option.service.dto.CreateProductOptionParam;
+import alliwannadev.shop.core.api.product.controller.ProductApiPaths;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionCombinationParam;
+import alliwannadev.shop.core.application.option.service.dto.CreateProductOptionParam;
 import alliwannadev.shop.api.product.support.TestProductDbUtil;
-import alliwannadev.shop.core.domain.modules.product.model.Product;
-import alliwannadev.shop.core.domain.modules.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.application.product.service.dto.CreateProductParam;
+import alliwannadev.shop.core.jpa.product.model.ProductEntity;
+import alliwannadev.shop.support.error.ErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ class ProductApiV1Test extends TestContainers {
     void givenProductId_whenSearchProduct_thenReturnSuccessfulResult() throws Exception {
         // Given
         createProduct();
-        Product product = testProductDbUtil.getFirstProductId();
+        ProductEntity product = testProductDbUtil.getFirstProductId();
         Long productId = product.getProductId();
 
         // When & Then

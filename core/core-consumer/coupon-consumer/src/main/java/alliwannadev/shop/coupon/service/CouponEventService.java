@@ -1,8 +1,8 @@
 package alliwannadev.shop.coupon.service;
 
 import alliwannadev.shop.coupon.eventhandler.EventHandler;
-import alliwannadev.shop.supports.event.Event;
-import alliwannadev.shop.supports.event.EventPayload;
+import alliwannadev.shop.support.event.Event;
+import alliwannadev.shop.support.event.EventPayload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

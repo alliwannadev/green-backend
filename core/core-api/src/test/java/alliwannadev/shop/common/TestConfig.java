@@ -1,7 +1,7 @@
 package alliwannadev.shop.common;
 
-import alliwannadev.shop.supports.snowflake.Snowflake;
-import alliwannadev.shop.supports.snowflake.SnowflakeGenerator;
+import alliwannadev.shop.support.snowflake.Snowflake;
+import alliwannadev.shop.support.snowflake.SnowflakeGenerator;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.springframework.boot.test.context.TestConfiguration;
