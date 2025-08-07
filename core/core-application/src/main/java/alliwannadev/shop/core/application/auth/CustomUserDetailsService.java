@@ -23,9 +23,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> foundUser = userCacheService.getOneByEmail(username);
+        long userId = Long.parseLong(username);
+        Optional<UserEntity> foundUser = userCacheService.getOneByUserId(userId);
         if (foundUser.isEmpty()) {
-            foundUser = userJpaRepository.findOneByEmail(username);
+            foundUser = userJpaRepository.findById(userId);
         }
 
         return foundUser

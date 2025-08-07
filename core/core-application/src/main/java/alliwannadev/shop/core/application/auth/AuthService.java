@@ -1,5 +1,6 @@
 package alliwannadev.shop.core.application.auth;
 
+import alliwannadev.shop.core.application.user.service.dto.GetUserResult;
 import alliwannadev.shop.core.domain.common.constant.TokenType;
 import alliwannadev.shop.core.application.auth.dto.SignInParam;
 import alliwannadev.shop.core.application.auth.dto.SignUpParam;
@@ -56,9 +57,12 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public TokenInfo signIn(SignInParam signInParam) {
+        GetUserResult user = userService
+                .getOneByEmail(signInParam.email())
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
-                        signInParam.email(),
+                        user.userId(),
                         signInParam.password()
                 );
 
@@ -68,7 +72,7 @@ public class AuthService {
         return jwtService.createTokenInfo(authentication);
     }
 
-    public String getEmailFromToken(TokenInfo tokenInfo) {
-        return jwtService.getEmail(tokenInfo.accessToken(), TokenType.ACCESS_TOKEN);
+    public Long getUserIdFromToken(TokenInfo tokenInfo) {
+        return jwtService.getUserId(tokenInfo.accessToken(), TokenType.ACCESS_TOKEN);
     }
 }
