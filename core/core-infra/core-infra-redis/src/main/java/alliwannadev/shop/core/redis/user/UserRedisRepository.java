@@ -24,23 +24,23 @@ public class UserRedisRepository {
         redisTemplate
                 .opsForValue()
                 .set(
-                        generateKey(user.getEmail()),
+                        generateKey(user.getUserId()),
                         Objects.requireNonNull(DataSerializer.serialize(user)),
                         ttl
                 );
     }
 
-    public Optional<User> getOneByEmail(String email) {
+    public Optional<User> getOneByUserId(Long userId) {
         String user = redisTemplate
                 .opsForValue()
-                .get(generateKey(email));
+                .get(generateKey(userId));
 
         return StringUtils.isEmpty(user) ?
                 Optional.empty() :
                 Optional.ofNullable(DataSerializer.deserialize(user, User.class));
     }
 
-    private String generateKey(String email) {
-        return "user:%s".formatted(email);
+    private String generateKey(Long userId) {
+        return "user:%s".formatted(userId);
     }
 }

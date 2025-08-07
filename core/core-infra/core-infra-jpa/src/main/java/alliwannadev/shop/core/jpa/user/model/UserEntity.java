@@ -48,6 +48,7 @@ public class UserEntity extends BaseTimeEntity {
             String imageUrl,
             Set<Role> roles
     ) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
         this.name = name;

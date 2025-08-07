@@ -35,6 +35,7 @@ public class User {
             String imageUrl,
             Set<Role> roles
     ) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
         this.name = name;

@@ -29,11 +29,11 @@ public class JwtService {
         return new TokenInfo(GRANT_TYPE, accessToken);
     }
 
-    public String getEmail(
+    public Long getUserId(
             String token,
             TokenType tokenType
     ) {
-        return jwtTokenProvider.getEmail(token, tokenType);
+        return jwtTokenProvider.getUserId(token, tokenType);
     }
 
     private String generateAccessToken(CustomUser customUser) {

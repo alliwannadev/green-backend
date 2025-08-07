@@ -18,9 +18,9 @@ public class UserCacheService {
     private final UserJpaRepository userJpaRepository;
     private final UserRedisRepository userRedisRepository;
 
-    public void create(String email) {
+    public void create(Long userId) {
         UserEntity userEntity = userJpaRepository
-                .findOneByEmail(email)
+                .findById(userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
         userRedisRepository.create(
                 userEntity.toDomain(),
@@ -28,9 +28,9 @@ public class UserCacheService {
         );
     }
 
-    public Optional<UserEntity> getOneByEmail(String email) {
+    public Optional<UserEntity> getOneByUserId(Long userId) {
         return userRedisRepository
-                        .getOneByEmail(email)
+                        .getOneByUserId(userId)
                         .map(UserEntity::fromDomain);
     }
 }
