@@ -37,7 +37,7 @@ public class AuthApiV1 {
             @Valid @RequestBody SignInRequestV1 signInRequestV1
     ) {
         TokenInfo tokenInfo = authService.signIn(signInRequestV1.toDto());
-        userCacheService.create(authService.getEmailFromToken(tokenInfo));
+        userCacheService.create(authService.getUserIdFromToken(tokenInfo));
 
         return OkResponse.of(
                 TokenResponseV1.of(
