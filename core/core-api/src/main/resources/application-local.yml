@@ -1,3 +1,8 @@
+server:
+  tomcat:
+    threads:
+      max: 250
+
 spring:
   config:
     activate:
@@ -8,6 +13,8 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/green
     username: root
     password: 123456
+    hikari:
+      maximum-pool-size: 80
 
   jpa:
     hibernate.ddl-auto: none

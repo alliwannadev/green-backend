@@ -19,6 +19,10 @@ dependencies {
     // Commons-lang3
     implementation("org.apache.commons:commons-lang3:3.17.0")
 
+    // Monitoring
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+
     // Test
     testImplementation(project(":support:snowflake"))
     testImplementation(project(":support:data-serializer"))
