@@ -1,3 +1,8 @@
+server:
+  tomcat:
+    threads:
+      max: 200
+
 spring:
   config:
     activate:
@@ -8,6 +13,8 @@ spring:
     url: jdbc:mysql://${PROD_RDB_URL}
     username: ${PROD_RDB_USERNAME}
     password: ${PROD_RDB_PASSWORD}
+    hikari:
+      maximum-pool-size: 10
 
   jpa:
     hibernate.ddl-auto: none

@@ -1,5 +1,6 @@
 package alliwannadev.shop.core.api.common.config;
 
+import alliwannadev.shop.core.api.common.error.ExceptionHandlingFilter;
 import alliwannadev.shop.core.api.product.controller.ProductApiPaths;
 import alliwannadev.shop.core.api.common.security.JwtAccessDeniedHandler;
 import alliwannadev.shop.core.api.common.security.JwtAuthenticationEntryPoint;
@@ -33,6 +34,8 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
+
+    private final ExceptionHandlingFilter exceptionHandlingFilter;
     private final CorsFilter corsFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -40,7 +43,7 @@ public class SecurityConfig {
     @Bean
     public RequestMatcher permitAllEndPointMatcher() {
         String[] permitAllUriPatterns = {
-                "/", "/favicon.ico", "/error",
+                "/", "/favicon.ico", "/error", "/actuator/**",
                 "/v1/auth/sign-in", "/v1/auth/sign-up"
         };
 
@@ -66,6 +69,7 @@ public class SecurityConfig {
         http
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(exceptionHandlingFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider),
