@@ -102,6 +102,6 @@ public class UserQueryJpaRepository {
             return null;
         }
 
-        return searchType != UserSearchType.PHONE ? null : userEntity.email.startsWith(keyword);
+        return searchType != UserSearchType.PHONE ? null : userEntity.phone.startsWith(keyword);
     }
 }
