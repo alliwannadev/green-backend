@@ -1,7 +1,19 @@
-server.port: 9001
+server:
+  port: 9001
+  shutdown: graceful
 
 spring:
   profiles:
     active: local
   application:
     name: coupon-consumer
+
+management:
+  metrics:
+    tags:
+      application:
+        ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
