@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "alliwannadev"
-version = "1.0.2"
+version = "1.0.3"
 
 val javaVersion = "21"
 java.sourceCompatibility = JavaVersion.valueOf("VERSION_${javaVersion}")
